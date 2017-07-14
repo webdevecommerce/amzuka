@@ -1,0 +1,244 @@
+.errorContainer{
+	float:left;
+	margin:5px 0px;
+	border:1px solid #DF0505;
+	background: url(../images/error_msg.png) no-repeat scroll 9px #FDE4E1;
+	width:99.5%;
+	height:40px;
+}
+#validationErr{
+	float:left;
+	margin:5px 0px;
+	border:1px solid #DF0505;
+	background-color: #FDE4E1;
+	color:#DF0505;
+	padding-left: 10%;
+	width:89.5%;
+}
+.errorContainer span{
+	float:left;
+	padding-left:50px;
+	color:#DF0505;
+	font-weight:bold;
+	line-height:38px;
+	font-size:13px;
+}
+#message-green{
+	float:left;
+	margin:5px 0px;
+	border:1px solid #64a71c;
+	background: url(../images/success.png) no-repeat scroll 9px #DDEACF;
+	width:99.5%;
+	height:40px;
+}
+#message-green span{
+	float:left;
+	padding-left:50px;
+	color:#64a71c;
+	font-weight:bold;
+	line-height:38px;
+	font-size:13px;
+}
+
+.login-logo {
+    width: 150px;
+}
+.main-content {
+    padding: 0 10px !important;
+}
+.cat-ddl{
+	margin:8px 0px !important;
+}
+.right{
+	float:right !important;
+	margin-right:0px !important;
+}
+
+.errorBox{
+	border-color:#fc6e96;
+	box-shadow:0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px rgba(163, 83, 43, 0.6);
+	outline: 0 none;
+}
+label.errorBox{
+	/* background: rgba(0, 0, 0, 0) url("../images/alert.png") no-repeat scroll left center; */
+	color:#fc6e96 !important;
+	border: unset;
+  box-shadow: unset;
+	color: #de5130;
+	display: inline-block;
+	font-size: 11px;
+	height: 13px;
+	margin: 3px;
+	padding-left: 21px;
+	padding-top: 2px;
+}
+form.center {
+	margin-left: 25%;
+	text-align: center;
+	width: 50%;
+}
+.center .two-form .input-group {
+	float: left;
+	width: 98% !important;
+}
+.center h3 .btn {
+	margin-right: 10px;
+}
+
+/* inner pages */
+.inner-page{
+    background: url(../images/site/midO_bg.png) top repeat-x #f6f6f6;
+    padding: 30px 0 30px 0;
+    text-align: center;
+}
+.inner-page h2 {
+    font-size: 26px;
+    color: #000;
+    text-transform: uppercase;
+    position: relative;
+    margin-bottom: 70px;
+}
+.inner-page h2:after {
+    content: '';
+    width: 100px;
+    background: #d5573b;
+    position: absolute;
+    bottom: -15px;
+    left: 0;
+    margin: 0 auto;
+    right: 0;
+    height: 2px;
+}
+.inner-section {
+    background: #fff;
+    border: 1px solid #e9e9e9;
+    padding: 30px 30px;
+    border-radius: 10px;
+    width: 90%;
+    display: inline-block;
+    clear: both;
+}
+.inner-section > p {
+    text-align: justify;
+}
+.inner-section li {
+	list-style: outside none disc;
+	margin-left: 20px;
+	padding-left: 17px;
+	text-align: justify;
+}
+.faq-page p{
+text-align:justify !important;
+}
+
+.form-cont {
+	text-align:justify !important;
+	padding-left:30%;
+}
+.form-cont form label sup {
+    color: #f00 !important;
+    font-size: 14px;
+    top: -3px;
+}
+.btn-full button,.btn-full>a {
+    width: 100%;
+}
+.form-group label.errorBox {
+    float: right;
+}
+
+.panel-red, .panel-red > .panel-heading {
+    background-color: #d9534f;
+    border-color: #d9534f;
+}
+.panel-yellow, .panel-yellow > .panel-heading {
+    background-color: #f0ad4e;
+    border-color: #f0ad4e;
+}
+.panel-green, .panel-green > .panel-heading {
+    background-color: #5cb85c;
+    border-color: #5cb85c;
+}
+.panel-blue, .panel-blue > .panel-heading {
+    background-color: #337ab7;
+    border-color: #337ab7;
+}
+.panel-heading{
+	color: #fff;
+}
+.panel-body{
+	background:#fff;;
+}
+#basic-addon1 {
+    padding: 9px 25px;
+}
+.basic-addon2 {
+    float: left !important;
+    width: 84% !important;
+}
+.social_share {
+	text-align:center;
+	width|:100%;
+}
+.social_share li{
+	display: inline;
+	cursor: pointer;
+	float:left;
+}
+.social_share li a{
+	height: 15px;
+	width: 15px;
+	display: inline;
+	float:left;
+	background-size:15px;
+}
+.fb-share a{
+	background: url(../images/site/fb.jpg);
+}
+.twit-share a{
+	background: url(../images/site/twit.jpg);
+}
+.mobNo{
+	width:84% !important;
+}
+.otp_verify_btn{
+	width:75% !important;
+}
+.mob_send_otp {
+	font-size: 10px;
+	font-weight: bold;
+	height: 34px;
+	margin: 0 3px 2px;
+	width: 22%;
+}
+.nav_ac > li {
+	/* background: #009688 none repeat scroll 0 0;
+	color: #fff !important; */
+	height: 25px;
+	list-style: outside none none;
+	margin: 4px 0;
+}
+.nav_ac > li > a {
+	display: inline;
+	padding: 20px 3px;
+	vertical-align: middle;
+}
+.nav_ac > li > a:hover {
+	color: #ccc;
+}
+.checkbox label, .radio label{
+	padding-left:0px !important;
+}
+.lbl{
+	font-size:100%;
+}
+.form-view .col-md-6.col-sm-6.col-xs-12 {
+    margin: 2px 0px !important;
+    line-height: 22px;
+    padding: 4px 0px;
+}
+.form-view .col-md-9.col-sm-9.col-xs-12 {
+    margin: 2px 0px !important;
+    line-height: 22px;
+    padding: 4px 0px;
+}

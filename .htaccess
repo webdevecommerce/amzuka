@@ -1,0 +1,6 @@
+RewriteEngine On
+RewriteBase /amzuka/
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond $1 !^(index\.php|javascript|images|robots\.txt)
+RewriteRule ^(.*)$ /amzuka/index.php?/$1 [L]

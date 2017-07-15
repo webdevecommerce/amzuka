@@ -70,6 +70,7 @@ define('PROMOCODES',					'promocodes');
 define('ORDERS',							'orders');
 define('OPTIONS',							'options');
 define('OPTIONS_VALUES',			'options_values');
+define('FILTERVALUES',			'filter_values');
 
 /*
 |--------------------------------------------------------------------------

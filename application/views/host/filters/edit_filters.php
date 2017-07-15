@@ -7,14 +7,7 @@ $this->load->view(ADMIN_PATH.'/templates/header',$this->data);
 		<div class="clearfix"></div>
 	</div>
 	<div class="x_content">
-		<div class="col-xs-3">
-			<!-- required for floating -->
-			<!-- Nav tabs -->
-			<ul class="nav nav-tabs tabs-left">
-				<li class="active"><a href="#filter_info" data-toggle="tab">Content</a></li>
-				</li>
-			</ul>
-		</div>
+		
 
 		<div class="col-xs-9">
 			<!-- Tab panes -->
@@ -22,13 +15,27 @@ $this->load->view(ADMIN_PATH.'/templates/header',$this->data);
 				<div class="tab-pane active" id="filter_info">
 					<?php
 					$attributes = array('class' => 'form-horizontal form-label-left', 'id' => 'filter_info_form', 'enctype' => 'multipart/form-data','data-parsley-validate'=>'');
-					echo form_open_multipart(ADMIN_PATH.'/filters/insertEditFilter', $attributes)
+					echo form_open_multipart(ADMIN_PATH.'/filters/updateFilter', $attributes)
 					?>
+					
+					<?php $filter_details = $this->data['filter_details']->result(); //echo '<pre>'; print_r($this->data['filter_details']->result());die; ?>
+					<input type="hidden" name="id" value="<?php echo $filter_details[0]->id; ?>"/>
 						<div class="form-group">
 							<label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">Name <span class="required">*</span>
 							</label>
 							<div class="col-md-9 col-sm-9 col-xs-12">
-								<input type="text" name="filter_name" id="filter_name" required class="form-control col-md-7 col-xs-12" value="" />
+								<input type="text" name="filter_name" id="filter_name" value="<?php echo $filter_details[0]->filter_name; ?>" required class="form-control col-md-7 col-xs-12" value="" />
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="control-label col-md-3 col-sm-3 col-xs-12" for="status">Status <span class="required">*</span>
+							</label>
+							<div class="col-md-9 col-sm-9 col-xs-12">
+								<div class="checkbox">
+									<label>
+										<input type="checkbox" class="js-switch" <?php if($filter_details[0]->status=='Active') echo 'checked'; ?>  name="status" />
+									</label>
+								</div>
 							</div>
 						</div>
 						<div class="ln_solid"></div>
@@ -38,27 +45,6 @@ $this->load->view(ADMIN_PATH.'/templates/header',$this->data);
 							</div>
 						</div>
 					</form>	
-				<div class="form-group">					
-					<?php if(!empty($filters_details)){?>
-						<table class="table">
-						  <thead>
-							<tr>
-							  <th>#</th>
-							  <th>Filter Name</th>
-							  <th>Action</th>
-							</tr>
-						  </thead>
-						  <tbody>
-							<tr>
-							  <th scope="row">1</th>
-							  <td>Mark</td>
-							  <td><a href="#" class=".btn-primary"></a></td>
-							  
-							</tr>
-							</tbody>
-						</table>
-					<?php }?>
-				</div>
 				</div>
 			</div>
 		</div>

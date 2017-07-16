@@ -69,9 +69,12 @@ define('SUBSCRIPTION_LIST',		'subscribers_list');
 define('PROMOCODES',					'promocodes');
 define('ORDERS',							'orders');
 define('OPTIONS',							'options');
+define('FILTERS',							'filters');
 define('OPTIONS_VALUES',			'options_values');
-define('FILTERS',					'filters');
-define('FILTERS_VALUES',					'filters_values');
+define('FILTERVALUES',			'filter_values');
+define('PRODUCT_FILTERS',			'product_filter_values');
+
+>>>>>>> 966156afae4339dfec502defc7b76ea7a4ffde53
 /*
 |--------------------------------------------------------------------------
 | Path modes

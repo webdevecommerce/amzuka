@@ -68,7 +68,7 @@ class Products extends MY_Controller {
 				$edit_mode=TRUE;
 				$this->data['heading'] = 'Edit Categories';
 			}else{
-				$this->data['heading'] = 'Add New Products';
+				$this->data['heading'] = 'Add New Product';
 			}
 			$this->data['edit_mode']=$edit_mode;
 			$this->load->view(ADMIN_PATH.'/products/add_edit_products',$this->data);
@@ -85,32 +85,49 @@ class Products extends MY_Controller {
 		if ($this->checkLogin('A') == ''){
 			redirect(ADMIN_PATH);
 		}else {
-			#echo "<pre>"; print_r($_POST); die;
+			//echo "<pre>"; print_r($_POST); die;
 			$category_id = $this->input->post('category_id');
+			$sub_category_id = $this->input->post('sub_category_id');
 			$status = $this->input->post('status');
 			$product_name = $this->input->post('product_name');
 			$product_image = $this->input->post('product_image');
 			$product_featured = $this->input->post('product_featured');
-			$sale_price = $this->input->post('sale_price');
+			$stock_count = $this->input->post('stock_count');
+			$tax = $this->input->post('tax');
+			$shipping_cost = $this->input->post('shipping_cost');
 			$price = $this->input->post('price');
+			$filters = $this->input->post('filters');
+			
+			
+			
+			if(isset($tax) && $tax <= 0){
+				$tax = 0;
+			}
+			
+			if(isset($shipping_cost) && $shipping_cost <= 0){
+				$shipping_cost = 0;
+			}
 			
 			if(isset($status) && $status=='on'){
 				$newstatus='Publish';
 			}else{
-				$newstatus='Inpublish';
+				$newstatus='Unpublish';
 			}
 			if(isset($product_featured) && $product_featured=='on'){
 				$featuredstatus='yes';
 			}else{
 				$featuredstatus='no';
 			}
-			$excludeArr = array('product_id');
+			$excludeArr = array('product_id','filters','sub_category_id','stock_count','tax');
 			$dataArr = array(
 					'product_name' => $product_name,
 					'category_id'=>$category_id,
+					'sub_category_id'=>$sub_category_id,
 					'product_featured'=>$featuredstatus,
-					'sale_price'=>$sale_price,
 					'price'=>$price,
+					'quantity'=>$stock_count,
+					'tax_cost'=>$tax,
+					'shipping_cost'=>$shipping_cost,
 					'status'=>$newstatus
 				);
 			if ($_FILES['product_image']['size']>0) {
@@ -129,16 +146,27 @@ class Products extends MY_Controller {
 					redirect(ADMIN_PATH.'/products/add_edit_product_form/'.$product_id);
 				}
 			}
+			
+			//print_r($dataArr);die;
+			
+			//print_r($filters);die;
+			
+			//die;
+			
 			if ($product_id == ''){
 				$dataArr['created']=date("Y-m-d H:i:s");
 				$condition = array();
 				$this->product_model->commonInsertUpdate(PRODUCT,'insert',$excludeArr,$dataArr,$condition);
+				$produc_id = $this->db->insert_id();
 				$this->setErrorMessage('success','Product added successfully');
 			}else {
 				$condition = array('id' => $product_id);
 				$this->product_model->commonInsertUpdate(PRODUCT,'update',$excludeArr,$dataArr,$condition);
 				$this->setErrorMessage('success','Product updated successfully');
 			}
+			
+			$this->product_model->insert_product_filters($filters,$produc_id);
+			
 			redirect(ADMIN_PATH.'/products/display_products');
 		}
 	}
@@ -204,6 +232,106 @@ class Products extends MY_Controller {
 			redirect(ADMIN_PATH.'/products/display_products');
 		}
 	}
+	
+	/* This will fetch all sub category of main category */
+	
+	public function fetch_sub_categories_id(){
+		$cat_id = $_POST['category_id'];
+		$sub_categories = $this->product_model->get_all_details(CATEGORIES,array('rootId'=>$cat_id));
+		if($sub_categories->num_rows() > 0){
+			$status = 1;
+		}else{
+			$status = 0;
+		}
+		echo json_encode(array('data' => $sub_categories->result_array(),'status' => $status));
+	}
+	
+	/* This will get filters of sub category */
+
+	public function fetch_filters_of_subcategory(){
+		$allFilters = array();
+		$sub_cat_id = $_POST['sub_category_id'];
+		$sub_categories = $this->product_model->get_selected_fields(CATEGORIES,array('filters'),array('id'=>$sub_cat_id));
+		if($sub_categories->row_array()['filters'] != ''){
+			$filtersId = explode(",",$sub_categories->row_array()['filters']);
+			if(!empty(array_filter($filtersId))){
+				foreach($filtersId as $key => $filter_value){
+					$filter_array = $this->get_filters_with_value($filter_value);
+					if($filter_array->num_rows() > 0){
+						if(array_filter($filter_array->result_array())){
+							$allFilters[] = $this->formatting_filter_array($filter_array->result_array());
+						}
+					}
+				}
+				
+			}
+		}
+		
+		if(!empty(array_filter($allFilters))){
+			$status = 1;
+		}else{
+			$status = 0;
+		}
+		echo json_encode(array('data' => $allFilters,'status' => $status));
+	}
+	
+	private function get_filters_with_value($filter_id = ''){
+		if($filter_id !=''){
+			$query = 'SELECT fv.id as fv_id,fv.value as fv_value,f.id as filter_id,f.filter_name FROM '.FILTER_VALUES.' fv '.
+									' INNER JOIN '.FILTERS.' f '.
+									' ON fv.filter_id = f.id AND fv.filter_id = '.$filter_id;
+			return $result = $this->db->query($query);
+		}
+	}
+	
+	private function formatting_filter_array($filter_array = array()){
+		
+		$newArray = [];
+		$first = true;
+		foreach ($filter_array as $item) {
+				if ($first) {
+						$first = false;
+						$newArray = [
+								'filter_id' => $item['filter_id'],
+								'filter_value' => $item['filter_name'],
+								'filter_values' => []
+						];
+				}
+
+				$newArray['filter_values'][] = [
+						'fv_id' => $item['fv_id'],
+						'fv_value' => $item['fv_value'],
+				];
+		}
+			return $newArray;
+//		print_r($newArray);die;
+	
+	/* 	$newArray = array_reduce($filter_array,function($carry,$item){
+			// create key so as to distinct values from each other
+			$key = $item['filter_id'] . '-' . $item['filter_name'];
+
+			// check if created key exists in `$carry`, 
+			// if not - we init it with some data
+			if (empty($carry[$key])) {
+					$carry[$key] = [
+							'filter_id' => $item['filter_id'],
+							'filter_name' => $item['filter_name'],
+							'filter_values' => []
+					];
+			}
+
+			// add values to `filter_values`
+			$carry[$key]['filter_values'][] = [
+					'fv_id' => $item['fv_id'],
+					'fv_value' => $item['fv_value'],
+			];
+
+			return $carry;
+	}, []); */
+	
+	}
+	
+	
 	
 }
 

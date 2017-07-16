@@ -6,29 +6,31 @@ $this->load->view(ADMIN_PATH.'/templates/header',$this->data);
 	<div class="x_title">
 		<div class="clearfix"></div>
 	</div>
-	<div class="x_content">
-		<div class="col-xs-3">
-			<!-- required for floating -->
-			<!-- Nav tabs -->
-			<ul class="nav nav-tabs tabs-left">
-				<li class="active"><a href="#filter_info" data-toggle="tab">Content</a></li>
-				</li>
-			</ul>
-		</div>
-
+	
 		<div class="col-xs-9">
 			<!-- Tab panes -->
 			<div class="tab-content">
 				<div class="tab-pane active" id="filter_info">
 					<?php
 					$attributes = array('class' => 'form-horizontal form-label-left', 'id' => 'filter_info_form', 'enctype' => 'multipart/form-data','data-parsley-validate'=>'');
-					echo form_open_multipart(ADMIN_PATH.'/filters/insertEditFilter', $attributes)
+					echo form_open_multipart(ADMIN_PATH.'/filters/insertFilter', $attributes)
 					?>
 						<div class="form-group">
 							<label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">Name <span class="required">*</span>
 							</label>
 							<div class="col-md-9 col-sm-9 col-xs-12">
 								<input type="text" name="filter_name" id="filter_name" required class="form-control col-md-7 col-xs-12" value="" />
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="control-label col-md-3 col-sm-3 col-xs-12" for="status">Status <span class="required">*</span>
+							</label>
+							<div class="col-md-9 col-sm-9 col-xs-12">
+								<div class="checkbox">
+									<label>
+										<input type="checkbox" class="js-switch" checked name="status" />
+									</label>
+								</div>
 							</div>
 						</div>
 						<div class="ln_solid"></div>
@@ -43,18 +45,23 @@ $this->load->view(ADMIN_PATH.'/templates/header',$this->data);
 						<table class="table">
 						  <thead>
 							<tr>
-							  <th>#</th>
+							  <th>S No</th>
 							  <th>Filter Name</th>
+							  <th>Filter Values</th>
+							  <th>Status</th>
 							  <th>Action</th>
 							</tr>
 						  </thead>
 						  <tbody>
+							<?php foreach($filters_details->result() as $key=>$details){?> 
 							<tr>
-							  <th scope="row">1</th>
-							  <td>Mark</td>
-							  <td><a href="#" class=".btn-primary"></a></td>
-							  
-							</tr>
+							<?php //echo '<pre>'; print_r($filters_details->result());die; ?>
+								<th scope="row"><?php echo $key+1; ?></th>
+							  <td><?php echo $details->filter_name; ?></td>
+								<td><button type="button" class="btn btn-primary"><a href="<?php echo ADMIN_PATH; ?>/filters/addFilterValues/<?php echo $details->id; ?>"  style="color:white;">Show or Add values</a></button></td>
+							  <td><?php echo $details->status; ?></td>
+							  <td><a href="<?php echo ADMIN_PATH; ?>/filters/editFilter/<?php echo $details->id; ?>" class=".btn-primary" style="color:blue;">Edit</a> | <a href="<?php echo ADMIN_PATH; ?>/filters/deleteFilter/<?php echo $details->id; ?>" class=".btn-primary" style="color:blue;">Delete</a></td>
+							</tr><?php } ?>
 							</tbody>
 						</table>
 					<?php }?>
@@ -62,7 +69,6 @@ $this->load->view(ADMIN_PATH.'/templates/header',$this->data);
 				</div>
 			</div>
 		</div>
-	</div>
 </div>
 
 

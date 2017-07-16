@@ -13,7 +13,7 @@ $this->load->view(ADMIN_PATH.'/templates/header',$this->data);
 					<th>Name</th>
 					<th>Status</th>
 					<th>Featured</th>
-					<th>Subcategory</th>
+					<!--<th>Subcategory</th>-->
 					<th>Actions</th>
 				</tr>
 			</thead>
@@ -33,11 +33,11 @@ $this->load->view(ADMIN_PATH.'/templates/header',$this->data);
 							}
 						?>
 						<?php if($mode==1){?>
-						<a href="<?php echo ADMIN_PATH; ?>/categories/change_category_status/1/<?php echo $row->id; ?>">
+						<a href="<?php echo ADMIN_PATH; ?>/categories/change_sub_category_status/1/<?php echo $row->id; ?>">
 							<span class="label label-danger lbl"><?php echo $row->status; ?></span>
 						</a>
 						<?php }else if($mode==0){?>
-						<a href="<?php echo ADMIN_PATH; ?>/categories/change_category_status/0/<?php echo $row->id; ?>">
+						<a href="<?php echo ADMIN_PATH; ?>/categories/change_sub_category_status/0/<?php echo $row->id; ?>">
 							<span class="label label-success lbl"><?php echo $row->status; ?></span>
 						</a>
 						<?php }else if($mode<0){?>
@@ -55,28 +55,28 @@ $this->load->view(ADMIN_PATH.'/templates/header',$this->data);
 							}
 						?>
 						<?php if($mode==1){?>
-						<a href="<?php echo ADMIN_PATH; ?>/categories/featured_category/1/<?php echo $row->id; ?>">
+						<a href="<?php echo ADMIN_PATH; ?>/categories/featured_sub_category/1/<?php echo $row->id; ?>">
 							<span class="label label-danger lbl"><?php echo $row->featured; ?></span>
 						</a>
 						<?php }else if($mode==0){?>
-						<a href="<?php echo ADMIN_PATH; ?>/categories/featured_category/0/<?php echo $row->id; ?>">
+						<a href="<?php echo ADMIN_PATH; ?>/categories/featured_sub_category/0/<?php echo $row->id; ?>">
 							<span class="label label-success lbl"><?php echo $row->featured; ?></span>
 						</a>
 						<?php }else if($mode<0){?>
 							<span class="label label-default lbl"><?php echo $row->featured; ?></span>
 						<?php }?>
 					</td>
-					<td>
-					<a class="btn btn-primary" href="<?php echo ADMIN_PATH; ?>/categories/view_sub_categories/<?php echo $row->id; ?>">
+					<!--<td>
+					<a class="btn btn-primary" href="<?php echo ADMIN_PATH; ?>/categories/view_sub_category/<?php echo $row->id; ?>">
 					Subcategory List
 					</a>
-					</td>
+					</td>-->
 					<td>
 						<div class="btn-group">
 							<a class="btn btn-primary" href="<?php echo ADMIN_PATH; ?>/categories/view_category/<?php echo $row->id; ?>">
 								<span class="fa fa-eye"></span>
 							</a>
-							<a class="btn btn-primary" href="<?php echo ADMIN_PATH; ?>/categories/add_edit_categories_form/<?php echo $row->id; ?>">
+							<a class="btn btn-primary" href="<?php echo ADMIN_PATH; ?>/categories/add_edit_sub_categories_form/<?php echo $row->id; ?>">
 								<span class="fa fa-edit"></span>
 							</a>
 							<a class="btn btn-primary" href="<?php echo ADMIN_PATH; ?>/categories/delete_category/<?php echo $row->id; ?>">

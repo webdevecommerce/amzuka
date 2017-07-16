@@ -53,7 +53,7 @@ extract($privileges);
 										<a><i class="fa fa-cogs"></i> Categories <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu <?php if($currentMgt=='categories'){ ?>nav-open<?php } ?>">
 											<?php if((in_array(0,$categories)) || $allPrev==1){ ?>
-                      <li <?php if($currentPage=='display_categories' || $currentPage=='view_categories'){ ?>class="current-page"<?php } ?>><a href="<?php echo ADMIN_PATH; ?>/categories/display_categories">Categorise List</a></li>
+                      <li <?php if($currentPage=='display_categories' || $currentPage=='view_categories' || $currentPage=='view_sub_categories'){ ?>class="current-page"<?php } ?>><a href="<?php echo ADMIN_PATH; ?>/categories/display_categories">Categorise List</a></li>
 											<?php } ?>
 											<?php if((in_array(1,$categories)) || $allPrev==1){ ?>
                       <li <?php if($currentPage=='add_edit_categories_form'){ ?>class="current-page"<?php } ?>><a href="<?php echo ADMIN_PATH; ?>/categories/add_edit_categories_form">Add Category</a></li>

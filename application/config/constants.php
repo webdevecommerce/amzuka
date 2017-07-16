@@ -70,7 +70,8 @@ define('PROMOCODES',					'promocodes');
 define('ORDERS',							'orders');
 define('OPTIONS',							'options');
 define('OPTIONS_VALUES',			'options_values');
-
+define('FILTERS',					'filters');
+define('FILTERS_VALUES',					'filters_values');
 /*
 |--------------------------------------------------------------------------
 | Path modes

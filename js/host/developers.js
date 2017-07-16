@@ -2,7 +2,7 @@ $( document ).ready( function() {
 	// Handle child category
 	// --------------------------------------------------
 	$( '#isChild' ).on('click',toggleSubCat );
-	
+	$( '#isChild_sub' ).on('click',toggleSubCat );
 	
 	$( '#editBtn' ).on('click',toggleEditGroup );
 	
@@ -45,6 +45,7 @@ function toggleEditGroupPrd() {
 
 function toggleSubCat() {
 	$("#catGroup").toggle();	
+	$("#filterGroup").toggle();
 }
 
 //

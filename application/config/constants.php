@@ -74,7 +74,6 @@ define('OPTIONS_VALUES',			'options_values');
 define('FILTERVALUES',			'filter_values');
 define('PRODUCT_FILTERS',			'product_filter_values');
 
->>>>>>> 966156afae4339dfec502defc7b76ea7a4ffde53
 /*
 |--------------------------------------------------------------------------
 | Path modes

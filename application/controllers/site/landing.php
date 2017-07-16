@@ -22,11 +22,15 @@ class Landing extends MY_Controller {
 	public function index(){
 		
 		$this->data['sliders'] = $this->landing_model->get_all_details(SLIDER,array('status'=>'Publish'));
+		
+		$this->data['rootCategories'] = $this->landing_model->get_all_details(CATEGORIES,array('rootID'=>0,'status'=>'Active'));
+		$this->data['subCategories'] = $this->landing_model->get_all_details(CATEGORIES,array('rootID !=' => 0,'status'=>'Active'));
+		//echo '<pre>'; print_r($this->data['sliders']->result());die;
 		$this->data['heading'] = 'Home';
 		
-		echo "In Progress"; die;
+		//echo "In Progress"; die;
 		
-		$this->load->view('site/landing/landing',$this->data);
+		$this->load->view('site/landing/homepage',$this->data);
 	}
 }
 

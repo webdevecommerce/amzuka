@@ -69,7 +69,9 @@ define('SUBSCRIPTION_LIST',		'subscribers_list');
 define('PROMOCODES',					'promocodes');
 define('ORDERS',							'orders');
 define('OPTIONS',							'options');
+define('FILTERS',							'filters');
 define('OPTIONS_VALUES',			'options_values');
+define('FILTER_VALUES',			'filter_values');
 
 /*
 |--------------------------------------------------------------------------

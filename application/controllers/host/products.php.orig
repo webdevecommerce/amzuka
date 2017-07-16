@@ -13,7 +13,10 @@ class Products extends MY_Controller {
 		$this->load->helper(array('cookie','date','form'));
 		$this->load->library(array('encrypt','form_validation'));		
 		$this->load->model('product_model');
+<<<<<<< HEAD
+=======
 		$this->load->model('categories_model');
+>>>>>>> sunil
 		if ($this->checkPrivileges('product',$this->privStatus) == FALSE){
 			redirect(ADMIN_PATH);
 		}
@@ -56,6 +59,9 @@ class Products extends MY_Controller {
 	public function add_edit_product_form(){
 		if ($this->checkLogin('A') == ''){
 			redirect(ADMIN_PATH);
+<<<<<<< HEAD
+		}else {		
+=======
 		}else {
 			$condition = array();
 			$edit_mode=FALSE;
@@ -71,6 +77,7 @@ class Products extends MY_Controller {
 				$this->data['heading'] = 'Add New Products';
 			}
 			$this->data['edit_mode']=$edit_mode;
+>>>>>>> sunil
 			$this->load->view(ADMIN_PATH.'/products/add_edit_products',$this->data);
 		}
 	}
@@ -81,6 +88,9 @@ class Products extends MY_Controller {
 	*
 	**/
 	public function insertEditProduct(){
+<<<<<<< HEAD
+		echo "<pre>";print_r($_POST);
+=======
 		//echo "<pre>";print_r($_POST);die;
 		if ($this->checkLogin('A') == ''){
 			redirect(ADMIN_PATH);
@@ -97,7 +107,7 @@ class Products extends MY_Controller {
 			if(isset($status) && $status=='on'){
 				$newstatus='Publish';
 			}else{
-				$newstatus='Unpublish';
+				$newstatus='Inpublish';
 			}
 			if(isset($product_featured) && $product_featured=='on'){
 				$featuredstatus='yes';
@@ -141,6 +151,7 @@ class Products extends MY_Controller {
 			}
 			redirect(ADMIN_PATH.'/products/display_products');
 		}
+>>>>>>> sunil
 	}
 	
 	/**
@@ -204,106 +215,6 @@ class Products extends MY_Controller {
 			redirect(ADMIN_PATH.'/products/display_products');
 		}
 	}
-	
-	/* This will fetch all sub category of main category */
-	
-	public function fetch_sub_categories_id(){
-		$cat_id = $_POST['category_id'];
-		$sub_categories = $this->product_model->get_all_details(CATEGORIES,array('rootId'=>$cat_id));
-		if($sub_categories->num_rows() > 0){
-			$status = 1;
-		}else{
-			$status = 0;
-		}
-		echo json_encode(array('data' => $sub_categories->result_array(),'status' => $status));
-	}
-	
-	/* This will get filters of sub category */
-
-	public function fetch_filters_of_subcategory(){
-		$allFilters = array();
-		$sub_cat_id = $_POST['sub_category_id'];
-		$sub_categories = $this->product_model->get_selected_fields(CATEGORIES,array('filters'),array('id'=>$sub_cat_id));
-		if($sub_categories->row_array()['filters'] != ''){
-			$filtersId = explode(",",$sub_categories->row_array()['filters']);
-			if(!empty(array_filter($filtersId))){
-				foreach($filtersId as $key => $filter_value){
-					$filter_array = $this->get_filters_with_value($filter_value);
-					if($filter_array->num_rows() > 0){
-						if(array_filter($filter_array->result_array())){
-							$allFilters[] = $this->formatting_filter_array($filter_array->result_array());
-						}
-					}
-				}
-				
-			}
-		}
-		
-		if(!empty(array_filter($allFilters))){
-			$status = 1;
-		}else{
-			$status = 0;
-		}
-		echo json_encode(array('data' => $allFilters,'status' => $status));
-	}
-	
-	private function get_filters_with_value($filter_id = ''){
-		if($filter_id !=''){
-			$query = 'SELECT fv.id as fv_id,fv.value as fv_value,f.id as filter_id,f.filter_name FROM '.FILTER_VALUES.' fv '.
-									' INNER JOIN '.FILTERS.' f '.
-									' ON fv.filter_id = f.id AND fv.filter_id = '.$filter_id;
-			return $result = $this->db->query($query);
-		}
-	}
-	
-	private function formatting_filter_array($filter_array = array()){
-		
-		$newArray = [];
-		$first = true;
-		foreach ($filter_array as $item) {
-				if ($first) {
-						$first = false;
-						$newArray = [
-								'filter_id' => $item['filter_id'],
-								'filter_value' => $item['filter_name'],
-								'filter_values' => []
-						];
-				}
-
-				$newArray['filter_values'][] = [
-						'fv_id' => $item['fv_id'],
-						'fv_value' => $item['fv_value'],
-				];
-		}
-			return $newArray;
-//		print_r($newArray);die;
-	
-	/* 	$newArray = array_reduce($filter_array,function($carry,$item){
-			// create key so as to distinct values from each other
-			$key = $item['filter_id'] . '-' . $item['filter_name'];
-
-			// check if created key exists in `$carry`, 
-			// if not - we init it with some data
-			if (empty($carry[$key])) {
-					$carry[$key] = [
-							'filter_id' => $item['filter_id'],
-							'filter_name' => $item['filter_name'],
-							'filter_values' => []
-					];
-			}
-
-			// add values to `filter_values`
-			$carry[$key]['filter_values'][] = [
-					'fv_id' => $item['fv_id'],
-					'fv_value' => $item['fv_value'],
-			];
-
-			return $carry;
-	}, []); */
-	
-	}
-	
-	
 	
 }
 

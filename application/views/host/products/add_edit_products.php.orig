@@ -7,6 +7,12 @@ $this->load->view(ADMIN_PATH.'/templates/header',$this->data);
 		<div class="clearfix"></div>
 	</div>
 	<div class="x_content">
+<<<<<<< HEAD
+			Add content to the page ...
+	</div>
+</div>
+
+=======
 			<div class="col-xs-9">
 			<!-- Tab panes -->
 			<div class="tab-content">
@@ -43,7 +49,7 @@ $this->load->view(ADMIN_PATH.'/templates/header',$this->data);
 							<label class="control-label col-md-3 col-sm-3 col-xs-12" for="parent"> Category
 							</label>
 							<div class="col-md-9 col-sm-9 col-xs-12">
-								<select id="prod_cat" required name="category_id" class="cat-ddl form-control">
+								<select id="parent-0" name="category_id" class="cat-ddl form-control">
 									<option value="">Select Category</option>
 									<?php foreach($root_categories->result() as $row){ ?>
 									<option value="<?php echo $row->id; ?>"><?php echo $row->name; ?></option>
@@ -55,25 +61,6 @@ $this->load->view(ADMIN_PATH.'/templates/header',$this->data);
 							<div class="col-md-9 col-sm-9 col-xs-12"><code>No Categories found</code></div>
 							<?php } ?>
 						</div>
-						<div class="form-group" id="subCatGroup" >
-							<?php if($root_categories->num_rows()>0){ ?>
-							<label class="control-label col-md-3 col-sm-3 col-xs-12" for="parent"> Sub Category
-							</label>
-							<div class="col-md-9 col-sm-9 col-xs-12">
-								<select id="prod_sub_cat" required name="category_id" class="cat-ddl form-control">
-									<option value="">Select Sub Category</option>
-								</select>
-							</div>
-							<?php }else{ ?> 
-							<label class="control-label col-md-3 col-sm-3 col-xs-12" for="parent">&nbsp;</label>
-							<div class="col-md-9 col-sm-9 col-xs-12"><code>No Categories found</code></div>
-							<?php } ?>
-						</div>
-						<div class="form-group" id="filterGroup" >
-								<div id="allfilterOptions">
-									
-								</div>
-						</div>
 						<div class="form-group">
 							<label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">Price<span class="required">*</span>
 							</label>
@@ -81,7 +68,13 @@ $this->load->view(ADMIN_PATH.'/templates/header',$this->data);
 								<input type="text" name="price" id="price" required class="form-control col-md-7 col-xs-12" value="<?php if($edit_mode) echo $product_details->row()->price; ?>" />
 							</div>
 						</div>
-						
+						<div class="form-group">
+							<label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">Sale Price<span class="required">*</span>
+							</label>
+							<div class="col-md-9 col-sm-9 col-xs-12">
+								<input type="text" name="sale_price" id="sale_price" required class="form-control col-md-7 col-xs-12" value="<?php if($edit_mode) echo $product_details->row()->sale_price; ?>" />
+							</div>
+						</div>
 						<!--<div class="form-group" id="catGroup" >
 							<label class="control-label col-md-3 col-sm-3 col-xs-12" for="parent"> Choose Size
 							</label>
@@ -109,7 +102,7 @@ $this->load->view(ADMIN_PATH.'/templates/header',$this->data);
 							<div class="col-md-9 col-sm-9 col-xs-12">
 								<div class="checkbox">
 									<label>
-										<input type="checkbox" class="js-switch" checked name="status" />
+										<input type="checkbox" class="js-switch" <?php if($edit_mode) if($product_details->row()->status=='Publish') echo 'checked'; ?> name="status" />
 									</label>
 								</div>
 							</div>
@@ -127,75 +120,10 @@ $this->load->view(ADMIN_PATH.'/templates/header',$this->data);
 	</div>
 </div>
 <link rel="stylesheet" href="css/host/picker.min.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script type="text/javascript">
-		$(document).ready(function(){
-			$("#prod_cat").change(function(){
-					  cat_id = $(this).val();
-						$.ajax({
-								url: "<?php echo base_url(); ?>host/products/fetch_sub_categories_id",
-								data: { 'category_id' : cat_id },
-								method:"POST",
-								dataType:"JSON",
-								success: function(response){
-									if(response.status == '1'){
-											$("#prod_sub_cat")
-										.find('option')
-										.remove()
-										.end()
-										.append('<option value="">Select Sub Category</option>')
-										$.each(response.data,function(i,item){
-											$("#prod_sub_cat").append($('<option>',{
-													value:item.id,
-													text:item.name
-											}));
-										});
-									}else{
-										$("#prod_sub_cat")
-										.find('option')
-										.remove()
-										.end()
-										.append('<option value="">No Sub Categories Found</option>')
-									}
-								}
-						});
-				});
-				
-					$("#prod_sub_cat").change(function(){
-					  cat_id = $(this).val();
-						$.ajax({
-								url: "<?php echo base_url(); ?>host/products/fetch_filters_of_subcategory",
-								data: { 'sub_category_id' : cat_id },
-								method:"POST",
-								dataType:"JSON",
-								success: function(response){
-									if(response.status == '1'){
-										
-										$("#allfilterOptions").html('');
-										for( key in response.data){
-											selectDiv = '<label class="control-label col-md-3 col-sm-3 col-xs-12" for="parent">'+response.data[key].filter_value+'</label>';
-											selectDiv += '<div class="col-md-9 col-sm-9 col-xs-12" class="dropdown">';
-											selectDiv += '<select class="cat-ddl form-control">';
-											for(k in response.data[key].filter_values){
-												selectDiv += '<option value='+response.data[key].filter_values[k].fv_id+'>'+response.data[key].filter_values[k].fv_value+'</option>';
-											}
-											
-											selectDiv += '</select></div>';
-											$('#allfilterOptions').append(selectDiv);
-										}
-									}else{
-										
-									}
-								}
-						});
-				});
-	
-				
-				
-		});
-</script>
+
+<script type="text/javascript" src="js/host/picker.min.js"></script>
+>>>>>>> sunil
 
 <?php 
 $this->load->view(ADMIN_PATH.'/templates/footer',$this->data); 
 ?>
-

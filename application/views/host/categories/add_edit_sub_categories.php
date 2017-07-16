@@ -23,7 +23,7 @@ $this->load->view(ADMIN_PATH.'/templates/header',$this->data);
 				<div class="tab-pane active" id="category_info">
 					<?php
 					$attributes = array('class' => 'form-horizontal form-label-left', 'id' => 'category_info_form', 'enctype' => 'multipart/form-data','data-parsley-validate'=>'');
-					echo form_open_multipart(ADMIN_PATH.'/categories/insertEditCategory', $attributes)
+					echo form_open_multipart(ADMIN_PATH.'/categories/insertEditSubCategory', $attributes)
 					?>
 						<input type="hidden"  name="category_id" value="<?php if($edit_mode)echo $categories_details->row()->id; ?>" />
 						<div class="form-group">
@@ -64,31 +64,33 @@ $this->load->view(ADMIN_PATH.'/templates/header',$this->data);
 							<label class="control-label col-md-3 col-sm-3 col-xs-12" for="isChild">Category hierarchy </label>
 							<div class="col-md-9 col-sm-9 col-xs-12">
 								<?php echo $cat_tree; ?>
-								<a href="javascript:void(0);" id="editBtn">Edit</a>
+								<!--<a href="javascript:void(0);" id="editBtn">Edit</a>-->
 							</div>
 						</div>
-						<div class="form-group" id="edit" style="display:none;">
+						<div class="form-group" id="edit" style="display:block;">
 							<label class="control-label col-md-3 col-sm-3 col-xs-12" for="isChild">Is Subcategory?  </label>
 							<div class="col-md-9 col-sm-9 col-xs-12">
 								<div class="checkbox">
 									<label>
-										<input type="checkbox" class="js-switch" name="isChild" id="isChild" />
+										<input type="checkbox" class="js-switch" name="isChild" id="isChild_sub" <?php if($categories_details->row()->rootID!=0){ echo "checked"; } else { echo "unchecked"; }  ?>/><?php echo $row->name; ?>
 									</label>
 								</div>
 							</div>
 						</div>
 						<?php } ?>
 						
-						<div class="form-group" id="catGroup" style="display:none;">
+						<div class="form-group" id="catGroup" style="display:<?php if($categories_details->row()->rootID!=0){echo" block";}else { echo "none";} ?>" >
 							<?php if($root_categories->num_rows()>0){ ?>
 							<label class="control-label col-md-3 col-sm-3 col-xs-12" for="parent">Parent Category
 							</label>
 							<div class="col-md-9 col-sm-9 col-xs-12">
 								<select id="parent-0" name="rootCat[]" class="cat-ddl form-control" onchange="getServices(0)">
 									<option value="">Select Category</option>
-									<?php foreach($root_categories->result() as $row){ ?>
-									<option value="<?php echo $row->id; ?>"><?php echo $row->name; ?></option>
-									<?php } ?>
+									<?php foreach($root_categories->result() as $row){ 
+			
+									?>
+									<option value="<?php echo $row->id; ?>" <?php if($categories_details->row()->rootID==$row->id){ echo "selected"; } ?>><?php echo $row->name; ?></option>
+									<?php }  ?>
 								</select>
 							</div>
 							<?php }else{ ?> 
@@ -98,7 +100,7 @@ $this->load->view(ADMIN_PATH.'/templates/header',$this->data);
 						</div>
 						
 						
-						<div class="form-group" >
+						<div class="form-group">
 							<label class="control-label col-md-3 col-sm-3 col-xs-12" for="status">Status <span class="required">*</span>
 							</label>
 							<div class="col-md-9 col-sm-9 col-xs-12">
@@ -111,14 +113,14 @@ $this->load->view(ADMIN_PATH.'/templates/header',$this->data);
 						</div>
 						
 						
-						<div class="form-group" id="filterGroup" style="display:none;">
+						<div class="form-group">
 							<label class="control-label col-md-3 col-sm-3 col-xs-12" for="status">Filters <span class="required">*</span>
 							</label>
 							<div class="col-md-9 col-sm-9 col-xs-12 filters">
 							<?php foreach($filters_details->result() as $row){ ?>
 									<label>
 									
-										<input type= "checkbox"  name="filters[]" value="<?php echo $row->id; ?>" /><?php echo ucfirst($row->filter_name); ?>
+										<input type= "checkbox"  name="filters[]" value="<?php echo $row->id; ?>" <?php if(in_array($row->id,$filterArray)) echo "checked"; ?>/><?php echo ucfirst($row->filter_name); ?>
 									
 									</label>
 									<?php } ?>

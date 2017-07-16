@@ -42,7 +42,7 @@ class Categories extends MY_Controller {
 			redirect(ADMIN_PATH);
 		}else {
 			$this->data['heading'] = 'Categories Lists';
-			$condition = array();
+			$condition = array('rootID' => '0');
 			$this->data['categoriesList'] = $this->categories_model->get_all_details(CATEGORIES,$condition);
 			$this->load->view(ADMIN_PATH.'/categories/display_categories',$this->data);
 		}
@@ -61,6 +61,7 @@ class Categories extends MY_Controller {
 			$edit_mode=FALSE;
 			$condition = array('rootID' => '0');
 			$this->data['root_categories'] = $this->categories_model->get_all_details(CATEGORIES,$condition);
+			$this->data['filters_details'] = $this->categories_model->get_all_details(FILTERS,array());
 			if($categories_id!=''){
 				$condition = array('id' => $categories_id);
 				$this->data['categories_details'] = $this->categories_model->get_all_details(CATEGORIES,$condition);
@@ -99,6 +100,62 @@ class Categories extends MY_Controller {
 		}
 	}
 	
+		/**
+	| 
+	| This function loads the add v/edit Category form
+	|
+	**/
+	public function add_edit_sub_categories_form(){
+		if ($this->checkLogin('A') == ''){
+			redirect(ADMIN_PATH);
+		}else {
+			//echo '<pre>'; print_r($_POST); die;
+			$categories_id = $this->uri->segment(4,0);
+			$edit_mode=FALSE;
+			$condition = array('rootID' => '0');
+			$this->data['root_categories'] = $this->categories_model->get_all_details(CATEGORIES,$condition);
+			$this->data['filters_details'] = $this->categories_model->get_all_details(FILTERS,array());
+			//print_r($this->data['filters_details']->result());die;
+			if($categories_id!=''){
+				$condition = array('id' => $categories_id);
+				$this->data['categories_details'] = $this->categories_model->get_all_details(CATEGORIES,$condition);
+				$this->data['filterArray']  = explode(',',$this->data['categories_details']->row()->filters);
+				
+				if ($this->data['categories_details']->num_rows() <=0){
+					redirect(ADMIN_PATH);
+				}
+				$cId = $this->data['categories_details']->row()->rootID;
+				$cat_tree='';
+				if($cId>0){
+					$catTra = array();
+					$sub_categories = $this->categories_model->get_all_details(CATEGORIES,array('id'=>$cId));
+					if($sub_categories->num_rows()>0){
+						$catTra[] = $sub_categories->row()->name;
+						$having_subCat=1;
+						while($having_subCat>0){							
+							$sub_categories = $this->categories_model->get_all_details(CATEGORIES,array('id'=>$sub_categories->row()->rootID));
+							if($sub_categories->num_rows()==0){
+								$having_subCat=0;
+							}else{
+								$catTra[] = $sub_categories->row()->name;
+							}
+						}
+					}
+					$catTra = array_reverse($catTra);
+					$cat_tree= @implode(' > ',$catTra);
+				}
+				$this->data['cat_tree'] = $cat_tree;				
+				
+				$edit_mode=TRUE;
+				$this->data['heading'] = 'Edit Sub Categories';
+			}else{
+				$this->data['heading'] = 'Add New Sub Categories';
+			}
+			$this->data['edit_mode']=$edit_mode;
+			$this->load->view(ADMIN_PATH.'/categories/add_edit_sub_categories',$this->data);
+		}
+	}
+	
 	/**
 	| 
 	| This function insert and edit a Category
@@ -108,12 +165,14 @@ class Categories extends MY_Controller {
 		if ($this->checkLogin('A') == ''){
 			redirect(ADMIN_PATH);
 		}else {
-			#echo "<pre>"; print_r($_POST); die;
+			//echo "<pre>"; print_r($_POST); die;
 			$category_id = $this->input->post('category_id');
 			$status = $this->input->post('status');
 			$name = $this->input->post('name');
 			$isChild = $this->input->post('isChild');
-			
+			$filters_ids = $this->input->post('filters');
+			$proceed = TRUE;
+			//echo '<pre>'; print_r($filters_ids); die;
 			if(isset($status) && $status=='on'){
 				$newstatus='Active';
 			}else{
@@ -139,11 +198,16 @@ class Categories extends MY_Controller {
 				$url_title = $urlBase.'-'.$duplicate_url->num_rows();
 			}
 			
-			$excludeArr = array("category_id","category_image","isChild","status","rootCat","catH");
+			$excludeArr = array("category_id","filters","isChild","status","rootCat","catH");
 			
 			$dataArr = array(
 					'status' => $newstatus,
 					'url_title'=>$url_title
+				);
+			
+			$dataArr = array(
+					'filters' => @implode(',',$filters_ids)
+					
 				);
 			
 			if ($category_id == ''){
@@ -155,46 +219,35 @@ class Categories extends MY_Controller {
 					$dataArr['rootID'] = $rootID;
 				}
 			}else{
-				$catH = $this->input->post('catH');				
-				if($catH==1){
+				
 					if($isChild =='Yes'){
 						$rootCat = $this->input->post('rootCat');
 						$rootCat = array_unique(array_filter($rootCat));
 						$rootID = intval($rootCat[count($rootCat)-1]);
 						$dataArr['rootID'] = $rootID;
+						$checkChildCat = $this->categories_model->get_all_details(CATEGORIES,array('rootID' => $category_id));
+						if($checkChildCat->num_rows()>0){
+							$proceed = FALSE;
+						}
 					}else{
 						$dataArr['rootID'] = 0;
 					}
-				}else{
-					unset($dataArr['rootID']);
+				
+			}
+			if($proceed){
+				if ($category_id == ''){
+					$dataArr['dateAdded']=date("Y-m-d H:i:s");
+					$this->categories_model->commonInsertUpdate(CATEGORIES,'insert',$excludeArr,$dataArr,$condition);
+					$this->setErrorMessage('success','Category added successfully');
+				}else {
+					$condition = array('id' => $category_id);
+					$this->categories_model->commonInsertUpdate(CATEGORIES,'update',$excludeArr,$dataArr,$condition);
+					$this->setErrorMessage('success','Category updated successfully');
 				}
+			}else{
+				$this->setErrorMessage('error','This category have sub categories, So cannot make changes');
 			}
 			
-			if($_FILES['category_image']['size']>0){
-				$config['encrypt_name'] = TRUE;
-				$config['overwrite'] = FALSE;
-				$config['allowed_types'] = 'jpg|jpeg|gif|png';
-				$config['max_size'] = 2000;
-				$config['upload_path'] = './images/category';
-				$this->load->library('upload', $config);
-				if ( $this->upload->do_upload('category_image')){
-					$categoryDetails = $this->upload->data();
-					$dataArr['image'] = $categoryDetails['file_name'];
-				}else{
-					$categoryDetails = $this->upload->display_errors();
-					$this->setErrorMessage('error',strip_tags($categoryDetails));
-					redirect(ADMIN_PATH.'/categories/add_edit_categories_form/'.$category_id);
-				}
-			}
-			if ($category_id == ''){
-				$dataArr['dateAdded']=date("Y-m-d H:i:s");
-				$this->categories_model->commonInsertUpdate(CATEGORIES,'insert',$excludeArr,$dataArr,$condition);
-				$this->setErrorMessage('success','Category added successfully');
-			}else {
-				$condition = array('id' => $category_id);
-				$this->categories_model->commonInsertUpdate(CATEGORIES,'update',$excludeArr,$dataArr,$condition);
-				$this->setErrorMessage('success','Category updated successfully');
-			}
 			redirect(ADMIN_PATH.'/categories/display_categories');
 		}
 	}
@@ -336,7 +389,140 @@ class Categories extends MY_Controller {
 			redirect(ADMIN_PATH.'/categories/display_categories');
 		}
 	}
+		
+	/**
+	| 
+	| This function loads the categories list page
+	|
+	**/
+	public function view_sub_categories(){
+		if ($this->checkLogin('A') == ''){
+			redirect(ADMIN_PATH);
+		}else {
+			$condition = array('id' => $this->uri->segment(4));
+			$this->data['getmaincategories'] = $this->categories_model->get_all_details(CATEGORIES,$condition);
+			$this->data['headingname'] = $this->data['getmaincategories']->row()->name;
+			$this->data['heading'] = 'Subcategories';
+			$condition = array('rootID' => $this->uri->segment(4));
+			$this->data['categoriesList'] = $this->categories_model->get_all_details(CATEGORIES,$condition);
+			$this->load->view(ADMIN_PATH.'/categories/display_sub_categories',$this->data);
+		}
+	}
+	
+	public function change_sub_category_status(){
+		if ($this->checkLogin('A') == ''){
+			redirect(ADMIN_PATH);
+		}else {
+			$mode = $this->uri->segment(4,0);
+			$category_id = $this->uri->segment(5,0);
+			$status = ($mode == '0')?'Inactive':'Active';
+			$newdata = array('status' => $status);
+			
+			$condition = array('id' => $category_id);
+			$getRootId = $this->categories_model->get_all_details(CATEGORIES,$condition)->row()->rootID;
+			$this->categories_model->update_details(CATEGORIES,$newdata,$condition);
+			$this->setErrorMessage('success','Subcategory Status Changed Successfully');
+			redirect(ADMIN_PATH.'/categories/view_sub_categories/'.$getRootId);
+		}
+	}
+	
+	public function featured_sub_category(){
+		if ($this->checkLogin('A') == ''){
+			redirect(ADMIN_PATH);
+		}else {
+			$mode = $this->uri->segment(4,0);
+			$category_id = $this->uri->segment(5,0);
+			$featured = ($mode == '0')?'No':'Yes';
+			$newdata = array('featured' => $featured);
+			$condition = array('id' => $category_id);
+			$getRootId = $this->categories_model->get_all_details(CATEGORIES,$condition)->row()->rootID;
+			$this->categories_model->update_details(CATEGORIES,$newdata,$condition);
+			$this->setErrorMessage('success','Category Featured Status Changed Successfully');
+			redirect(ADMIN_PATH.'/categories/view_sub_categories/'.$getRootId);
+		}
+	}
+	
+	public function insertEditSubCategory(){
+		if ($this->checkLogin('A') == ''){
+			redirect(ADMIN_PATH);
+		}else {
+			//echo "<pre>"; print_r($_POST);
+			$category_id = $this->input->post('category_id');
+			$status = $this->input->post('status');
+			$name = $this->input->post('name');
+			$isChild = $this->input->post('isChild');
+			$filters_ids = $this->input->post('filters');
+			//echo '<pre>'; print_r($filters_ids); die;
+			if(isset($status) && $status=='on'){
+				$newstatus='Active';
+			}else{
+				$newstatus='Inactive';
+			}
+			
+			if(isset($isChild) && $isChild=='on'){
+				$isChild='Yes';
+			}else{
+				$isChild='No';
+			}
+			
+			$excludeArr = array("category_id","filters","isChild","status","rootCat","catH");
+			
+			$dataArr = array(
+					'status' => $newstatus,
+					'url_title'=>$url_title
+				);
+			
+			$dataArr = array(
+					'filters' => @implode(',',$filters_ids)
+					
+				);
+
+					if($isChild =='Yes'){
+						$rootCat = $this->input->post('rootCat');
+						$rootCat = array_unique(array_filter($rootCat));
+						$rootID = intval($rootCat[count($rootCat)-1]);
+						$dataArr['rootID'] = $rootID;
+					}else{
+						$dataArr['rootID'] = 0;
+					}
+				
+			
+			/*if($_FILES['category_image']['size']>0){
+				$config['encrypt_name'] = TRUE;
+				$config['overwrite'] = FALSE;
+				$config['allowed_types'] = 'jpg|jpeg|gif|png';
+				$config['max_size'] = 2000;
+				$config['upload_path'] = './images/category';
+				$this->load->library('upload', $config);
+				if ( $this->upload->do_upload('category_image')){
+					$categoryDetails = $this->upload->data();
+					$dataArr['image'] = $categoryDetails['file_name'];
+				}else{
+					$categoryDetails = $this->upload->display_errors();
+					$this->setErrorMessage('error',strip_tags($categoryDetails));
+					redirect(ADMIN_PATH.'/categories/add_edit_categories_form/'.$category_id);
+				}
+			}*/
+			if ($dataArr['rootID'] == 0){
+				$condition = array('id' => $category_id);
+				$dataArr['dateAdded']=date("Y-m-d H:i:s");
+				$this->categories_model->commonInsertUpdate(CATEGORIES,'update',$excludeArr,$dataArr,$condition);
+				$this->setErrorMessage('success','Category added successfully');
+				redirect(ADMIN_PATH.'/categories/display_categories');
+			}else {
+				$condition = array('id' => $category_id);
+				$this->categories_model->commonInsertUpdate(CATEGORIES,'update',$excludeArr,$dataArr,$condition);
+				$this->setErrorMessage('success','SubCategory updated successfully');
+				redirect(ADMIN_PATH.'/categories/view_sub_categories/'.$dataArr['rootID']);
+			}
+			
+		}
+	}
+		
 }
 
 /* End of file categories.php */
 /* Location: ./application/controllers/admin/categories.php */
+
+
+?>

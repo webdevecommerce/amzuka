@@ -68,7 +68,7 @@ class Products extends MY_Controller {
 				$edit_mode=TRUE;
 				$this->data['heading'] = 'Edit Categories';
 			}else{
-				$this->data['heading'] = 'Add New Products';
+				$this->data['heading'] = 'Add New Product';
 			}
 			$this->data['edit_mode']=$edit_mode;
 			$this->load->view(ADMIN_PATH.'/products/add_edit_products',$this->data);
@@ -85,14 +85,28 @@ class Products extends MY_Controller {
 		if ($this->checkLogin('A') == ''){
 			redirect(ADMIN_PATH);
 		}else {
-			#echo "<pre>"; print_r($_POST); die;
+			//echo "<pre>"; print_r($_POST); die;
 			$category_id = $this->input->post('category_id');
+			$sub_category_id = $this->input->post('sub_category_id');
 			$status = $this->input->post('status');
 			$product_name = $this->input->post('product_name');
 			$product_image = $this->input->post('product_image');
 			$product_featured = $this->input->post('product_featured');
-			$sale_price = $this->input->post('sale_price');
+			$stock_count = $this->input->post('stock_count');
+			$tax = $this->input->post('tax');
+			$shipping_cost = $this->input->post('shipping_cost');
 			$price = $this->input->post('price');
+			$filters = $this->input->post('filters');
+			
+			
+			
+			if(isset($tax) && $tax <= 0){
+				$tax = 0;
+			}
+			
+			if(isset($shipping_cost) && $shipping_cost <= 0){
+				$shipping_cost = 0;
+			}
 			
 			if(isset($status) && $status=='on'){
 				$newstatus='Publish';
@@ -104,13 +118,16 @@ class Products extends MY_Controller {
 			}else{
 				$featuredstatus='no';
 			}
-			$excludeArr = array('product_id');
+			$excludeArr = array('product_id','filters','sub_category_id','stock_count','tax');
 			$dataArr = array(
 					'product_name' => $product_name,
 					'category_id'=>$category_id,
+					'sub_category_id'=>$sub_category_id,
 					'product_featured'=>$featuredstatus,
-					'sale_price'=>$sale_price,
 					'price'=>$price,
+					'quantity'=>$stock_count,
+					'tax_cost'=>$tax,
+					'shipping_cost'=>$shipping_cost,
 					'status'=>$newstatus
 				);
 			if ($_FILES['product_image']['size']>0) {
@@ -129,16 +146,27 @@ class Products extends MY_Controller {
 					redirect(ADMIN_PATH.'/products/add_edit_product_form/'.$product_id);
 				}
 			}
+			
+			//print_r($dataArr);die;
+			
+			//print_r($filters);die;
+			
+			//die;
+			
 			if ($product_id == ''){
 				$dataArr['created']=date("Y-m-d H:i:s");
 				$condition = array();
 				$this->product_model->commonInsertUpdate(PRODUCT,'insert',$excludeArr,$dataArr,$condition);
+				$produc_id = $this->db->insert_id();
 				$this->setErrorMessage('success','Product added successfully');
 			}else {
 				$condition = array('id' => $product_id);
 				$this->product_model->commonInsertUpdate(PRODUCT,'update',$excludeArr,$dataArr,$condition);
 				$this->setErrorMessage('success','Product updated successfully');
 			}
+			
+			$this->product_model->insert_product_filters($filters,$produc_id);
+			
 			redirect(ADMIN_PATH.'/products/display_products');
 		}
 	}

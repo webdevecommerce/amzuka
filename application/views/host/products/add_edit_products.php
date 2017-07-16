@@ -60,7 +60,7 @@ $this->load->view(ADMIN_PATH.'/templates/header',$this->data);
 							<label class="control-label col-md-3 col-sm-3 col-xs-12" for="parent"> Sub Category
 							</label>
 							<div class="col-md-9 col-sm-9 col-xs-12">
-								<select id="prod_sub_cat" required name="category_id" class="cat-ddl form-control">
+								<select id="prod_sub_cat" required name="sub_category_id" class="cat-ddl form-control">
 									<option value="">Select Sub Category</option>
 								</select>
 							</div>
@@ -82,15 +82,30 @@ $this->load->view(ADMIN_PATH.'/templates/header',$this->data);
 							</div>
 						</div>
 						
-						<!--<div class="form-group" id="catGroup" >
-							<label class="control-label col-md-3 col-sm-3 col-xs-12" for="parent"> Choose Size
+						<div class="form-group">
+							<label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">Stock count<span class="required">*</span>
 							</label>
-							<select name="size" id="sizeVal" multiple>
-								<option value="small">Small</option>
-								<option value="medium">Medium</option>
-								<option value="large">Large</option>
-							</select>
-						</div>-->
+							<div class="col-md-9 col-sm-9 col-xs-12">
+								<input type="text" name="stock_count" id="stock_count" required class="form-control col-md-7 col-xs-12" value="<?php if($edit_mode) echo $product_details->row()->stock_count; ?>" />
+							</div>
+						</div>
+						
+						<div class="form-group">
+							<label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">Tax (%)<span class="required">*</span>
+							</label>
+							<div class="col-md-9 col-sm-9 col-xs-12">
+								<input type="text" name="tax" id="tax" required class="form-control col-md-7 col-xs-12" value="<?php if($edit_mode) echo $product_details->row()->tax; ?>" />
+							</div>
+						</div>
+						
+						<div class="form-group">
+							<label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">Shipping Cost<span class="required">*</span>
+							</label>
+							<div class="col-md-9 col-sm-9 col-xs-12">
+								<input type="text" name="shipping_cost" id="shipping_cost" required class="form-control col-md-7 col-xs-12" value="<?php if($edit_mode) echo $product_details->row()->shipping_cost; ?>" />
+							</div>
+						</div>
+						
 						<div class="form-group">
 							<label class="control-label col-md-3 col-sm-3 col-xs-12" for="status">Featured <span class="required">*</span>
 							</label>
@@ -175,7 +190,7 @@ $this->load->view(ADMIN_PATH.'/templates/header',$this->data);
 										for( key in response.data){
 											selectDiv = '<label class="control-label col-md-3 col-sm-3 col-xs-12" for="parent">'+response.data[key].filter_value+'</label>';
 											selectDiv += '<div class="col-md-9 col-sm-9 col-xs-12" class="dropdown">';
-											selectDiv += '<select class="cat-ddl form-control">';
+											selectDiv += '<select class="cat-ddl form-control" name="filters['+response.data[key].filter_id+']">';
 											for(k in response.data[key].filter_values){
 												selectDiv += '<option value='+response.data[key].filter_values[k].fv_id+'>'+response.data[key].filter_values[k].fv_value+'</option>';
 											}

@@ -73,6 +73,7 @@ define('FILTERS',							'filters');
 define('OPTIONS_VALUES',			'options_values');
 define('FILTERVALUES',			'filter_values');
 define('PRODUCT_FILTERS',			'product_filter_values');
+define('PRODUCTS',			'product');
 
 /*
 |--------------------------------------------------------------------------

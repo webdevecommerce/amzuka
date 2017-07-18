@@ -12,7 +12,7 @@ class Products extends MY_Controller {
 		parent::__construct();
 		$this->load->helper(array('cookie','date','form'));
 		$this->load->library(array('encrypt','form_validation'));		
-		$this->load->model('product_model');
+		$this->load->model('filters_model');
 		$this->load->model('categories_model');
 		if ($this->checkPrivileges('product',$this->privStatus) == FALSE){
 			redirect(ADMIN_PATH);
@@ -43,7 +43,7 @@ class Products extends MY_Controller {
 		}else {
 			$this->data['heading'] = 'Product List';
 			$condition = array();
-			$this->data['productList'] = $this->product_model->get_all_details(PRODUCT,$condition);
+			$this->data['productList'] = $this->filters_model->get_all_details(PRODUCT,$condition);
 			$this->load->view(ADMIN_PATH.'/products/display_products',$this->data);
 		}
 	}
@@ -64,7 +64,7 @@ class Products extends MY_Controller {
 			$product_id = $this->uri->segment(4,0);
 			if($product_id!=''){
 				$condition = array('id' => $categories_id);
-				$this->data['product_details'] = $this->product_model->get_all_details(PRODUCT,$condition);
+				$this->data['product_details'] = $this->filters_model->get_all_details(PRODUCT,$condition);
 				$edit_mode=TRUE;
 				$this->data['heading'] = 'Edit Categories';
 			}else{
@@ -97,8 +97,6 @@ class Products extends MY_Controller {
 			$shipping_cost = $this->input->post('shipping_cost');
 			$price = $this->input->post('price');
 			$filters = $this->input->post('filters');
-			
-			
 			
 			if(isset($tax) && $tax <= 0){
 				$tax = 0;
@@ -156,18 +154,18 @@ class Products extends MY_Controller {
 			if ($product_id == ''){
 				$dataArr['created']=date("Y-m-d H:i:s");
 				$condition = array();
-				$this->product_model->commonInsertUpdate(PRODUCT,'insert',$excludeArr,$dataArr,$condition);
+				$this->filters_model->commonInsertUpdate(PRODUCT,'insert',$excludeArr,$dataArr,$condition);
 				$produc_id = $this->db->insert_id();
 				$this->setErrorMessage('success','Product added successfully');
 			}else {
 				$condition = array('id' => $product_id);
-				$this->product_model->commonInsertUpdate(PRODUCT,'update',$excludeArr,$dataArr,$condition);
+				$this->filters_model->commonInsertUpdate(PRODUCT,'update',$excludeArr,$dataArr,$condition);
 				$this->setErrorMessage('success','Product updated successfully');
 			}
 			
-			$this->product_model->insert_product_filters($filters,$produc_id);
+			$this->filters_model->insert_product_filters($filters,$produc_id);
 			
-			redirect(ADMIN_PATH.'/products/display_products');
+			redirect(ADMIN_PATH.'/products/add_edit_product_form');
 		}
 	}
 	
@@ -184,7 +182,7 @@ class Products extends MY_Controller {
 			$status = ($mode == '0')?'UnPublish':'Publish';
 			$newdata = array('status' => $status);
 			$condition = array('seller_product_id' => $product_id);
-			$this->product_model->update_details(USER_PRODUCTS,$newdata,$condition);
+			$this->filters_model->update_details(USER_PRODUCTS,$newdata,$condition);
 			$this->setErrorMessage('success','Product Status Changed Successfully');
 			redirect(ADMIN_PATH.'/product/display_user_product_list');
 		}
@@ -201,11 +199,11 @@ class Products extends MY_Controller {
 			$this->data['heading'] = 'View Product';
 			$product_id = $this->uri->segment(4,0);
 			$condition = array('id' => $product_id);
-			$this->data['product_details'] = $this->product_model->get_all_details(PRODUCT,$condition);
-			$this->data['shiptoDetail'] = $this->product_model->get_all_details(SUB_SHIPPING,array('product_id' => $product_id))->result();
+			$this->data['product_details'] = $this->filters_model->get_all_details(PRODUCT,$condition);
+			$this->data['shiptoDetail'] = $this->filters_model->get_all_details(SUB_SHIPPING,array('product_id' => $product_id))->result();
 			
 			if ($this->data['product_details']->num_rows() == 1){
-				$this->data['catList'] = $this->product_model->get_cat_list($this->data['product_details']->row()->category_id);
+				$this->data['catList'] = $this->filters_model->get_cat_list($this->data['product_details']->row()->category_id);
 				$this->load->view(ADMIN_PATH.'/products/view_product',$this->data);
 			}else {
 				redirect(ADMIN_PATH);
@@ -223,11 +221,11 @@ class Products extends MY_Controller {
 		}else {
 			$product_id = $this->uri->segment(4,0);
 			$condition = array('id' => $product_id);
-			$old_product_details = $this->product_model->get_all_details(PRODUCT,array('id'=>$product_id));
+			$old_product_details = $this->filters_model->get_all_details(PRODUCT,array('id'=>$product_id));
 			$this->update_old_list_values($product_id,array(),$old_product_details);
 			$this->update_user_product_count($old_product_details);
-			$this->product_model->commonDelete(PRODUCT,$condition);
-			$this->product_model->commonDelete(SUBPRODUCT,array('product_id' => $product_id));
+			$this->filters_model->commonDelete(PRODUCT,$condition);
+			$this->filters_model->commonDelete(SUBPRODUCT,array('product_id' => $product_id));
 			$this->setErrorMessage('success','Product deleted successfully');
 			redirect(ADMIN_PATH.'/products/display_products');
 		}
@@ -237,7 +235,7 @@ class Products extends MY_Controller {
 	
 	public function fetch_sub_categories_id(){
 		$cat_id = $_POST['category_id'];
-		$sub_categories = $this->product_model->get_all_details(CATEGORIES,array('rootId'=>$cat_id));
+		$sub_categories = $this->filters_model->get_all_details(CATEGORIES,array('rootId'=>$cat_id));
 		if($sub_categories->num_rows() > 0){
 			$status = 1;
 		}else{
@@ -251,7 +249,7 @@ class Products extends MY_Controller {
 	public function fetch_filters_of_subcategory(){
 		$allFilters = array();
 		$sub_cat_id = $_POST['sub_category_id'];
-		$sub_categories = $this->product_model->get_selected_fields(CATEGORIES,array('filters'),array('id'=>$sub_cat_id));
+		$sub_categories = $this->filters_model->get_selected_fields(CATEGORIES,array('filters'),array('id'=>$sub_cat_id));
 		if($sub_categories->row_array()['filters'] != ''){
 			$filtersId = explode(",",$sub_categories->row_array()['filters']);
 			if(!empty(array_filter($filtersId))){

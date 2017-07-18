@@ -85,11 +85,11 @@
 						</div>
 						<div class="col-md-4">
 							<ul class="payment-list pull-right">
-								<li><img src="images/icon-payment-01.png" width="36" height="22" alt=""></li>
-								<li><img src="images/icon-payment-02.png" width="36" height="22" alt=""></li>
-								<li><img src="images/icon-payment-03.png" width="36" height="22" alt=""></li>
-								<li><img src="images/icon-payment-04.png" width="36" height="22" alt=""></li>
-								<li><img src="images/icon-payment-05.png" width="36" height="22" alt=""></li>
+								<li><img src="<?=base_url()?>images/icon-payment-01.png" width="36" height="22" alt=""></li>
+								<li><img src="<?=base_url()?>images/icon-payment-02.png" width="36" height="22" alt=""></li>
+								<li><img src="<?=base_url()?>images/icon-payment-03.png" width="36" height="22" alt=""></li>
+								<li><img src="<?=base_url()?>images/icon-payment-04.png" width="36" height="22" alt=""></li>
+								<li><img src="<?=base_url()?>images/icon-payment-05.png" width="36" height="22" alt=""></li>
 							</ul>
 						</div>
 					</div>

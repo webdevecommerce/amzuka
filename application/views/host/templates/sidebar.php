@@ -64,7 +64,7 @@ extract($privileges);
 									<?php if((isset($filters) && is_array($filters)) || $allPrev==1){ ?>
 									<li <?php if($currentMgt=='filters'){ ?>class="active"<?php } ?>>
 										<a><i class="fa fa-cogs"></i> Filters <span class="fa fa-chevron-down"></span></a>
-                    <ul class="nav child_menu <?php if($currentMgt=='filters'){ ?>nav-open<?php } ?>">
+                    <ul class="nav child_menu" <?php if($currentMgt=='filters'){ ?> style ="display: block;"<?php } ?>>
 											<?php if((in_array($filters)) || $allPrev==1){ //echo $currentPage;die; ?>
                       <li <?php if($currentPage=='add_edit_filters_form' || $currentPage=='editFilter' || $currentPage=='addFilterValues' || $currentPage=='editFilterValue'){ ?>class="current-page"<?php } ?>><a href="<?php echo ADMIN_PATH; ?>/filters/add_edit_filters_form">Filters</a></li>
 											<?php } ?>

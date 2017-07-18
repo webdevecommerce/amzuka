@@ -25,7 +25,7 @@
 											if($cat->id == $subcat->rootID) {?>
 												<div class="col-xs-6 col-md-4 col-lg-3">
 													<div class="submenu-block">
-													<span class="icon"><img src="images/icon-category1.png" alt=""></span><a class="name" href="listing.html"><?php echo $subcat->name;?></a>
+													<span class="icon"><img src="<?=base_url()?>images/icon-category1.png" alt=""></span><a class="name" href="cat/<?php echo $cat->url_title; ?>/<?php echo $subcat->url_title;?>"><?php echo $subcat->name;?></a>
 													</div>
 												</div>
 										<?php }
@@ -37,7 +37,7 @@
 									<!-- html block -->
 									<div class="col-md-3 hidden-sm hidden-xs">
 										<div class="img-fullheight">
-											<img class="img-responsive" src="images/menu-img-right-2.png" alt="">
+											<img class="img-responsive" src="<?=base_url()?>images/menu-img-right-2.png" alt="">
 										</div>
 									</div>
 									<!-- //end html block -->

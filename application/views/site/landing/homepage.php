@@ -9,20 +9,20 @@
 <meta name="description" content="">
 <meta name="author" content="">
 <title>Coolbaby template</title>
-<link rel="shortcut icon" href="css/favicon.ico">
+<link rel="shortcut icon" href="<?=base_url()?>css/favicon.ico">
 <!-- Bootstrap core CSS -->
-<link href="css/site/bootstrap.css" rel="stylesheet">
+<link href="<?=base_url()?>css/site/bootstrap.css" rel="stylesheet">
 <!-- CSS modules -->
-<link rel="stylesheet" href="fonts/flaticon/flaticon.css">
-<link rel="stylesheet" href="css/site/slick.css"/>
-<link rel="stylesheet" href="css/site/liMarquee.css">
-<link rel="stylesheet" href="css/site/colorbox.css">
-<link rel="stylesheet" href="css/site/jquery.nouislider.css">
+<link rel="stylesheet" href="<?=base_url()?>fonts/flaticon/flaticon.css">
+<link rel="stylesheet" href="<?=base_url()?>css/site/slick.css"/>
+<link rel="stylesheet" href="<?=base_url()?>css/site/liMarquee.css">
+<link rel="stylesheet" href="<?=base_url()?>css/site/colorbox.css">
+<link rel="stylesheet" href="<?=base_url()?>css/site/jquery.nouislider.css">
 <!-- Custom styles for this template -->
-<link href="css/site/coolbaby.css" rel="stylesheet">
+<link href="<?=base_url()?>css/site/coolbaby.css" rel="stylesheet">
 <!-- SLIDER REVOLUTION 4.x CSS SETTINGS -->
-<link rel="stylesheet" type="text/css" href="rs-plugin/css/settings.css" media="screen"/>
-<link rel="stylesheet" type="text/css" href="rs-plugin/css/extralayers.css" media="screen"/>
+<link rel="stylesheet" type="text/css" href="<?=base_url()?>rs-plugin/css/settings.css" media="screen"/>
+<link rel="stylesheet" type="text/css" href="<?=base_url()?>rs-plugin/css/extralayers.css" media="screen"/>
 </head>
 <body class="responsive">
 <div class="loader">
@@ -74,7 +74,8 @@
 			</div>
 		</div>
 		<!-- //end Search -->
-		<?php include('header.php')?>
+		
+		<?php $this->load->view('site/header.php'); ?>
 		<!-- Navbar height -->
 		<div class="navbar-height">
 		</div>
@@ -86,13 +87,13 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-xs-12 col-sm-4 col-lg-4">
-					<a href="index.html" class="item anim-icon"><span class="icon"><img src="images/anim-icon-1.gif" data-hover="images/anim-icon-1-hover.gif" alt=""/></span><span class="title">Free shipping on orders over $200</span></a>
+					<a href="index.html" class="item anim-icon"><span class="icon"><img src="<?=base_url()?>images/anim-icon-1.gif" data-hover="images/anim-icon-1-hover.gif" alt=""/></span><span class="title">Free shipping on orders over $200</span></a>
 				</div>
 				<div class="col-xs-12 col-sm-4 col-lg-4">
-					<a href="index.html" class="item anim-icon"><span class="icon"><img src="images/anim-icon-2.gif" data-hover="images/anim-icon-2-hover.gif" alt=""/></span><span class="title">30-day returns</span></a>
+					<a href="index.html" class="item anim-icon"><span class="icon"><img src="<?=base_url()?>images/anim-icon-2.gif" data-hover="images/anim-icon-2-hover.gif" alt=""/></span><span class="title">30-day returns</span></a>
 				</div>
 				<div class="col-xs-12 col-sm-4 col-lg-4">
-					<a href="index.html" class="item anim-icon"><span class="icon"><img src="images/anim-icon-3.gif" data-hover="images/anim-icon-3-hover.gif" alt=""/></span><span class="title">24/7 Support </span></a>
+					<a href="index.html" class="item anim-icon"><span class="icon"><img src="<?=base_url()?>images/anim-icon-3.gif" data-hover="images/anim-icon-3-hover.gif" alt=""/></span><span class="title">24/7 Support </span></a>
 				</div>
 			</div>
 		</div>
@@ -112,20 +113,20 @@
 					<li id="slide1" data-transition="zoomout" data-slotamount="7" data-masterspeed="500" data-title="First Slide" data-link="listing.html">
 					<!-- MAIN IMAGE -->
 					<?php //foreach($sliders->result() as $img) { ?>
-					<!--<img src="images/dummy.png" alt="slide1" data-lazyload="images/slider/<?php echo $img->slide; ?>">-->
+					<!--<img src="<?=base_url()?>images/dummy.png" alt="slide1" data-lazyload="images/slider/<?php echo $img->slide; ?>">-->
 					<?php //} ?>
-					<img src="images/dummy.png" alt="slide1" data-lazyload="images/sliders/slide1.png">
+					<img src="<?=base_url()?>images/dummy.png" alt="slide1" data-lazyload="images/sliders/slide1.png">
 					<!-- LAYERS img 1 -->
 					<div class="tp-caption fadein fadeout rs-parallaxlevel-1" data-x="500" data-y="0" data-speed="1000" data-start="500" data-easing="Power3.easeInOut" data-elementdelay="0.1" data-endelementdelay="0.1" style="z-index: 4;">
-						<img src="images/sliders/slide1-1.png" alt="">
+						<img src="<?=base_url()?>images/sliders/slide1-1.png" alt="">
 					</div>
 					<!-- LAYERS img 2 -->
 					<div class="tp-caption lfl fadeout rs-parallaxlevel-2" data-x="200" data-y="0" data-speed="1000" data-start="1000" data-easing="Power3.easeInOut" data-elementdelay="0.1" data-endelementdelay="0.1" style="z-index: 4;">
-						<img src="images/sliders/slide1-2.png" alt="">
+						<img src="<?=base_url()?>images/sliders/slide1-2.png" alt="">
 					</div>
 					<!-- LAYERS img 3 -->
 					<div class="tp-caption lfr fadeout rs-parallaxlevel-3" data-x="700" data-y="0" data-speed="1200" data-start="1600" data-easing="Power3.easeInOut" data-elementdelay="0.1" data-endelementdelay="0.1" style="z-index: 4;">
-						<img src="images/sliders/slide1-3.png" alt="">
+						<img src="<?=base_url()?>images/sliders/slide1-3.png" alt="">
 					</div>
 					<!-- LAYER NR. 0  -->
 					<div class="tp-caption text0 fadeout" data-x="1050" data-y="140" data-speed="800" data-start="2500" data-easing="Power3.easeInOut" data-splitout="none" data-elementdelay="0.1" data-endelementdelay="0.1" data-endspeed="300" style="z-index: 3; max-width: auto; max-height: auto; white-space: nowrap;">
@@ -149,11 +150,11 @@
 					<!-- SLIDE  -->
 					<li id="slide2" data-transition="zoomout" data-slotamount="7" data-masterspeed="500" data-title="Second Slide" data-link="listing.html">
 					<!-- MAIN IMAGE -->
-					<img src="images/dummy.png" alt="slide2" data-lazyload="images/sliders/slide2.jpg">
+					<img src="<?=base_url()?>images/dummy.png" alt="slide2" data-lazyload="images/sliders/slide2.jpg">
 					<!-- LAYERS -->
 					<!-- LAYERS img 1 -->
 					<div class="tp-caption fadein fadeout rs-parallaxlevel-1" data-x="750" data-y="0" data-speed="1000" data-start="500" data-easing="Power3.easeInOut" data-elementdelay="0.1" data-endelementdelay="0.1" style="z-index: 4;">
-						<img src="images/sliders/slide2.gif" alt="">
+						<img src="<?=base_url()?>images/sliders/slide2.gif" alt="">
 					</div>
 					<!-- LAYER NR. 0  -->
 					<div class="tp-caption text0 fadeout" data-x="380" data-y="210" data-speed="800" data-start="1000" data-easing="Power3.easeInOut" data-splitout="none" data-elementdelay="0.1" data-endelementdelay="0.1" data-endspeed="300" style="z-index: 3; max-width: auto; max-height: auto; white-space: nowrap;">
@@ -185,7 +186,7 @@
 			<div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
 				<div class="banner-circle animate fadeInDown" onclick="location.href='listing.html'">
 					<div class="image">
-						<img src="images/img1.jpg" alt="" class="animate-scale">
+						<img src="<?=base_url()?>images/img1.jpg" alt="" class="animate-scale">
 					</div>
 					<div class="title">
 						<span>New Arrivals</span>
@@ -195,7 +196,7 @@
 			<div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
 				<div class="banner-circle animate fadeInDown" onclick="location.href='listing.html'">
 					<div class="image">
-						<img src="images/img2.jpg" alt="" class="animate-scale">
+						<img src="<?=base_url()?>images/img2.jpg" alt="" class="animate-scale">
 					</div>
 					<div class="title">
 						<span>Summer Sale</span>
@@ -205,7 +206,7 @@
 			<div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
 				<div class="banner-circle animate fadeInDown" onclick="location.href='listing.html'">
 					<div class="image">
-						<img src="images/img3.jpg" alt="" class="animate-scale">
+						<img src="<?=base_url()?>images/img3.jpg" alt="" class="animate-scale">
 					</div>
 					<div class="title">
 						<span>Fur Clothing</span>
@@ -230,7 +231,7 @@
 				<div class="slides row1">
 					<div class="carousel-item 1">
 						<div class="product-preview">
-							<a href="#" class="preview-image"><img class="img-default" src="images/products/product1.jpg" alt=""></a>
+							<a href="#" class="preview-image"><img class="img-default" src="<?=base_url()?>images/products/product1.jpg" alt=""></a>
 							<div class="hover">
 								<div class="inside">
 									<h3 class="title"><a href="product.html">Long Product name Example</a></h3>
@@ -249,7 +250,7 @@
 					</div>
 					<div class="carousel-item 2">
 						<div class="product-preview">
-							<a href="#" class="preview-image"><img class="img-default" src="images/products/product2.jpg" alt=""></a>
+							<a href="#" class="preview-image"><img class="img-default" src="<?=base_url()?>images/products/product2.jpg" alt=""></a>
 							<div class="label label-sale">
 								<span>Sale</span>
 							</div>
@@ -277,7 +278,7 @@
 					</div>
 					<div class="carousel-item 3">
 						<div class="product-preview">
-							<a href="#" class="preview-image"><img class="img-default" src="images/products/product3.jpg" alt=""></a>
+							<a href="#" class="preview-image"><img class="img-default" src="<?=base_url()?>images/products/product3.jpg" alt=""></a>
 							<div class="hover">
 								<div class="inside">
 									<h3 class="title"><a href="product.html">Long Product name Example</a></h3>
@@ -296,7 +297,7 @@
 					</div>
 					<div class="carousel-item 4">
 						<div class="product-preview">
-							<a href="#" class="preview-image"><img class="img-default" src="images/products/product4.jpg" alt=""></a>
+							<a href="#" class="preview-image"><img class="img-default" src="<?=base_url()?>images/products/product4.jpg" alt=""></a>
 							<div class="hover">
 								<div class="inside">
 									<h3 class="title"><a href="product.html">Long Product name Example</a></h3>
@@ -315,7 +316,7 @@
 					</div>
 					<div class="carousel-item 5">
 						<div class="product-preview">
-							<a href="#" class="preview-image"><img class="img-default" src="images/products/product5.jpg" alt=""></a>
+							<a href="#" class="preview-image"><img class="img-default" src="<?=base_url()?>images/products/product5.jpg" alt=""></a>
 							<div class="hover">
 								<div class="inside">
 									<h3 class="title"><a href="product.html">Long Product name Example</a></h3>
@@ -334,7 +335,7 @@
 					</div>
 					<div class="carousel-item 6">
 						<div class="product-preview">
-							<a href="#" class="preview-image"><img class="img-default" src="images/products/product6.jpg" alt=""></a>
+							<a href="#" class="preview-image"><img class="img-default" src="<?=base_url()?>images/products/product6.jpg" alt=""></a>
 							<div class="hover">
 								<div class="inside">
 									<h3 class="title"><a href="product.html">Long Product name Example</a></h3>
@@ -353,7 +354,7 @@
 					</div>
 					<div class="carousel-item 7">
 						<div class="product-preview">
-							<a href="#" class="preview-image"><img class="img-default" src="images/products/product7.jpg" alt=""></a>
+							<a href="#" class="preview-image"><img class="img-default" src="<?=base_url()?>images/products/product7.jpg" alt=""></a>
 							<div class="hover">
 								<div class="inside">
 									<h3 class="title"><a href="product.html">Long Product name Example</a></h3>
@@ -372,7 +373,7 @@
 					</div>
 					<div class="carousel-item 8">
 						<div class="product-preview">
-							<a href="#" class="preview-image"><img class="img-default" src="images/products/product8.jpg" alt=""></a>
+							<a href="#" class="preview-image"><img class="img-default" src="<?=base_url()?>images/products/product8.jpg" alt=""></a>
 							<div class="hover">
 								<div class="inside">
 									<h3 class="title"><a href="product.html">Long Product name Example</a></h3>
@@ -391,7 +392,7 @@
 					</div>
 					<div class="carousel-item 9">
 						<div class="product-preview">
-							<a href="#" class="preview-image"><img class="img-default" src="images/products/product9.jpg" alt=""></a>
+							<a href="#" class="preview-image"><img class="img-default" src="<?=base_url()?>images/products/product9.jpg" alt=""></a>
 							<div class="hover">
 								<div class="inside">
 									<h3 class="title"><a href="product.html">Long Product name Example</a></h3>
@@ -410,7 +411,7 @@
 					</div>
 					<div class="carousel-item 10">
 						<div class="product-preview">
-							<a href="#" class="preview-image"><img class="img-default" src="images/products/product10.jpg" alt=""></a>
+							<a href="#" class="preview-image"><img class="img-default" src="<?=base_url()?>images/products/product10.jpg" alt=""></a>
 							<div class="hover">
 								<div class="inside">
 									<h3 class="title"><a href="product.html">Long Product name Example</a></h3>
@@ -439,7 +440,7 @@
 				<div class="slides">
 					<div class="carousel-item">
 						<div class="product-preview">
-							<a href="#" class="preview-image"><img class="img-default" src="images/products/product6.jpg" alt=""></a>
+							<a href="#" class="preview-image"><img class="img-default" src="<?=base_url()?>images/products/product6.jpg" alt=""></a>
 							<div class="hover">
 								<div class="inside">
 									<h3 class="title"><a href="product.html">Long Product name Example</a></h3>
@@ -458,7 +459,7 @@
 					</div>
 					<div class="carousel-item">
 						<div class="product-preview">
-							<a href="#" class="preview-image"><img class="img-default" src="images/products/product7.jpg" alt=""></a>
+							<a href="#" class="preview-image"><img class="img-default" src="<?=base_url()?>images/products/product7.jpg" alt=""></a>
 							<div class="hover">
 								<div class="inside">
 									<h3 class="title"><a href="product.html">Long Product name Example</a></h3>
@@ -477,7 +478,7 @@
 					</div>
 					<div class="carousel-item">
 						<div class="product-preview">
-							<a href="#" class="preview-image"><img class="img-default" src="images/products/product8.jpg" alt=""></a>
+							<a href="#" class="preview-image"><img class="img-default" src="<?=base_url()?>images/products/product8.jpg" alt=""></a>
 							<div class="hover">
 								<div class="inside">
 									<h3 class="title"><a href="product.html">Long Product name Example</a></h3>
@@ -496,7 +497,7 @@
 					</div>
 					<div class="carousel-item">
 						<div class="product-preview">
-							<a href="#" class="preview-image"><img class="img-default" src="images/products/product9.jpg" alt=""></a>
+							<a href="#" class="preview-image"><img class="img-default" src="<?=base_url()?>images/products/product9.jpg" alt=""></a>
 							<div class="hover">
 								<div class="inside">
 									<h3 class="title"><a href="product.html">Long Product name Example</a></h3>
@@ -515,7 +516,7 @@
 					</div>
 					<div class="carousel-item">
 						<div class="product-preview">
-							<a href="#" class="preview-image"><img class="img-default" src="images/products/product10.jpg" alt=""></a>
+							<a href="#" class="preview-image"><img class="img-default" src="<?=base_url()?>images/products/product10.jpg" alt=""></a>
 							<div class="hover">
 								<div class="inside">
 									<h3 class="title"><a href="product.html">Long Product name Example</a></h3>
@@ -534,7 +535,7 @@
 					</div>
 					<div class="carousel-item">
 						<div class="product-preview">
-							<a href="#" class="preview-image"><img class="img-default" src="images/products/product1.jpg" alt=""></a>
+							<a href="#" class="preview-image"><img class="img-default" src="<?=base_url()?>images/products/product1.jpg" alt=""></a>
 							<div class="hover">
 								<div class="inside">
 									<h3 class="title"><a href="product.html">Long Product name Example</a></h3>
@@ -553,7 +554,7 @@
 					</div>
 					<div class="carousel-item">
 						<div class="product-preview">
-							<a href="#" class="preview-image"><img class="img-default" src="images/products/product2.jpg" alt=""></a>
+							<a href="#" class="preview-image"><img class="img-default" src="<?=base_url()?>images/products/product2.jpg" alt=""></a>
 							<div class="hover">
 								<div class="inside">
 									<h3 class="title"><a href="product.html">Long Product name Example</a></h3>
@@ -572,7 +573,7 @@
 					</div>
 					<div class="carousel-item">
 						<div class="product-preview">
-							<a href="#" class="preview-image"><img class="img-default" src="images/products/product3.jpg" alt=""></a>
+							<a href="#" class="preview-image"><img class="img-default" src="<?=base_url()?>images/products/product3.jpg" alt=""></a>
 							<div class="hover">
 								<div class="inside">
 									<h3 class="title"><a href="product.html">Long Product name Example</a></h3>
@@ -591,7 +592,7 @@
 					</div>
 					<div class="carousel-item">
 						<div class="product-preview">
-							<a href="#" class="preview-image"><img class="img-default" src="images/products/product4.jpg" alt=""></a>
+							<a href="#" class="preview-image"><img class="img-default" src="<?=base_url()?>images/products/product4.jpg" alt=""></a>
 							<div class="hover">
 								<div class="inside">
 									<h3 class="title"><a href="product.html">Long Product name Example</a></h3>
@@ -610,7 +611,7 @@
 					</div>
 					<div class="carousel-item">
 						<div class="product-preview">
-							<a href="#" class="preview-image"><img class="img-default" src="images/products/product5.jpg" alt=""></a>
+							<a href="#" class="preview-image"><img class="img-default" src="<?=base_url()?>images/products/product5.jpg" alt=""></a>
 							<div class="hover">
 								<div class="inside">
 									<h3 class="title"><a href="product.html">Long Product name Example</a></h3>
@@ -659,7 +660,7 @@
 					<div class="product-preview">
 						<div class="preview">
 							<div class="preview-image-outer">
-								<a href="product.html" class="preview-image"><img class="img-responsive img-default" src="images/products/product-01.jpg" alt=""><img class="img-responsive img-second" src="images/products/product-02.jpg" alt=""></a>
+								<a href="product.html" class="preview-image"><img class="img-responsive img-default" src="<?=base_url()?>images/products/product-01.jpg" alt=""><img class="img-responsive img-second" src="<?=base_url()?>images/products/product-02.jpg" alt=""></a>
 							</div>
 							<a href="_ajax_view-product.html" class="quick-view"><span>Quick View</span></a>
 						</div>
@@ -691,7 +692,7 @@
 								<span>New</span>
 							</div>
 							<div class="preview-image-outer">
-								<a href="product.html" class="preview-image"><img class="img-responsive img-default" src="images/products/product-02.jpg" alt=""><img class="img-responsive img-second" src="images/products/product-02.jpg" alt=""></a>
+								<a href="product.html" class="preview-image"><img class="img-responsive img-default" src="<?=base_url()?>images/products/product-02.jpg" alt=""><img class="img-responsive img-second" src="<?=base_url()?>images/products/product-02.jpg" alt=""></a>
 							</div>
 							<a href="_ajax_view-product.html" class="quick-view"><span>Quick View</span></a>
 						</div>
@@ -711,7 +712,7 @@
 					<div class="product-preview">
 						<div class="preview">
 							<div class="preview-image-outer">
-								<a href="product.html" class="preview-image"><img class="img-responsive img-default" src="images/products/product-03.jpg" alt=""><img class="img-responsive img-second" src="images/products/product-02.jpg" alt=""></a>
+								<a href="product.html" class="preview-image"><img class="img-responsive img-default" src="<?=base_url()?>images/products/product-03.jpg" alt=""><img class="img-responsive img-second" src="<?=base_url()?>images/products/product-02.jpg" alt=""></a>
 							</div>
 							<a href="_ajax_view-product.html" class="quick-view"><span>Quick View</span></a>
 						</div>
@@ -740,7 +741,7 @@
 					<div class="product-preview">
 						<div class="preview">
 							<div class="preview-image-outer">
-								<a href="product.html" class="preview-image"><img class="img-responsive img-default" src="images/products/product-04.jpg" alt=""><img class="img-responsive img-second" src="images/products/product-02.jpg" alt=""></a>
+								<a href="product.html" class="preview-image"><img class="img-responsive img-default" src="<?=base_url()?>images/products/product-04.jpg" alt=""><img class="img-responsive img-second" src="<?=base_url()?>images/products/product-02.jpg" alt=""></a>
 							</div>
 							<a href="_ajax_view-product.html" class="quick-view"><span>Quick View</span></a>
 						</div>
@@ -760,7 +761,7 @@
 					<div class="product-preview">
 						<div class="preview">
 							<div class="preview-image-outer">
-								<a href="product.html" class="preview-image"><img class="img-responsive img-default" src="images/products/product-05.jpg" alt=""><img class="img-responsive img-second" src="images/products/product-02.jpg" alt=""></a>
+								<a href="product.html" class="preview-image"><img class="img-responsive img-default" src="<?=base_url()?>images/products/product-05.jpg" alt=""><img class="img-responsive img-second" src="<?=base_url()?>images/products/product-02.jpg" alt=""></a>
 							</div>
 							<a href="_ajax_view-product.html" class="quick-view"><span>Quick View</span></a>
 						</div>
@@ -780,7 +781,7 @@
 					<div class="product-preview">
 						<div class="preview">
 							<div class="preview-image-outer">
-								<a href="product.html" class="preview-image"><img class="img-responsive img-default" src="images/products/product-06.jpg" alt=""><img class="img-responsive img-second" src="images/products/product-02.jpg" alt=""></a>
+								<a href="product.html" class="preview-image"><img class="img-responsive img-default" src="<?=base_url()?>images/products/product-06.jpg" alt=""><img class="img-responsive img-second" src="<?=base_url()?>images/products/product-02.jpg" alt=""></a>
 							</div>
 							<a href="_ajax_view-product.html" class="quick-view"><span>Quick View</span></a>
 						</div>
@@ -800,7 +801,7 @@
 					<div class="product-preview">
 						<div class="preview">
 							<div class="preview-image-outer">
-								<a href="product.html" class="preview-image"><img class="img-responsive img-default" src="images/products/product-01.jpg" alt=""><img class="img-responsive img-second" src="images/products/product-02.jpg" alt=""></a>
+								<a href="product.html" class="preview-image"><img class="img-responsive img-default" src="<?=base_url()?>images/products/product-01.jpg" alt=""><img class="img-responsive img-second" src="<?=base_url()?>images/products/product-02.jpg" alt=""></a>
 							</div>
 							<a href="_ajax_view-product.html" class="quick-view"><span>Quick View</span></a>
 						</div>
@@ -820,7 +821,7 @@
 					<div class="product-preview">
 						<div class="preview">
 							<div class="preview-image-outer">
-								<a href="product.html" class="preview-image"><img class="img-responsive img-default" src="images/products/product-02.jpg" alt=""><img class="img-responsive img-second" src="images/products/product-02.jpg" alt=""></a>
+								<a href="product.html" class="preview-image"><img class="img-responsive img-default" src="<?=base_url()?>images/products/product-02.jpg" alt=""><img class="img-responsive img-second" src="<?=base_url()?>images/products/product-02.jpg" alt=""></a>
 							</div>
 							<a href="_ajax_view-product.html" class="quick-view"><span>Quick View</span></a>
 						</div>
@@ -840,7 +841,7 @@
 					<div class="product-preview">
 						<div class="preview">
 							<div class="preview-image-outer">
-								<a href="product.html" class="preview-image"><img class="img-responsive img-default" src="images/products/product-03.jpg" alt=""><img class="img-responsive img-second" src="images/products/product-02.jpg" alt=""></a>
+								<a href="product.html" class="preview-image"><img class="img-responsive img-default" src="<?=base_url()?>images/products/product-03.jpg" alt=""><img class="img-responsive img-second" src="<?=base_url()?>images/products/product-02.jpg" alt=""></a>
 							</div>
 							<a href="_ajax_view-product.html" class="quick-view"><span>Quick View</span></a>
 						</div>
@@ -860,7 +861,7 @@
 					<div class="product-preview">
 						<div class="preview">
 							<div class="preview-image-outer">
-								<a href="product.html" class="preview-image"><img class="img-responsive img-default" src="images/products/product-04.jpg" alt=""><img class="img-responsive img-second" src="images/products/product-02.jpg" alt=""></a>
+								<a href="product.html" class="preview-image"><img class="img-responsive img-default" src="<?=base_url()?>images/products/product-04.jpg" alt=""><img class="img-responsive img-second" src="<?=base_url()?>images/products/product-02.jpg" alt=""></a>
 							</div>
 							<a href="_ajax_view-product.html" class="quick-view"><span>Quick View</span></a>
 						</div>
@@ -880,7 +881,7 @@
 					<div class="product-preview">
 						<div class="preview">
 							<div class="preview-image-outer">
-								<a href="product.html" class="preview-image"><img class="img-responsive img-default" src="images/products/product-05.jpg" alt=""><img class="img-responsive img-second" src="images/products/product-02.jpg" alt=""></a>
+								<a href="product.html" class="preview-image"><img class="img-responsive img-default" src="<?=base_url()?>images/products/product-05.jpg" alt=""><img class="img-responsive img-second" src="<?=base_url()?>images/products/product-02.jpg" alt=""></a>
 							</div>
 							<a href="_ajax_view-product.html" class="quick-view"><span>Quick View</span></a>
 						</div>
@@ -900,7 +901,7 @@
 					<div class="product-preview">
 						<div class="preview">
 							<div class="preview-image-outer">
-								<a href="product.html" class="preview-image"><img class="img-responsive img-default" src="images/products/product-06.jpg" alt=""><img class="img-responsive img-second" src="images/products/product-02.jpg" alt=""></a>
+								<a href="product.html" class="preview-image"><img class="img-responsive img-default" src="<?=base_url()?>images/products/product-06.jpg" alt=""><img class="img-responsive img-second" src="<?=base_url()?>images/products/product-02.jpg" alt=""></a>
 							</div>
 							<a href="_ajax_view-product.html" class="quick-view"><span>Quick View</span></a>
 						</div>
@@ -938,28 +939,28 @@
 				</div>
 				<div class="slides slick-style3">
 					<div class="carousel-item">
-						<a href="blog-single.html"><img src="images/blog/blog-img-01.jpg" alt=""><span class="info">Blog post number 1 <span class="date">September 02, 2015</span></span></a>
+						<a href="blog-single.html"><img src="<?=base_url()?>images/blog/blog-img-01.jpg" alt=""><span class="info">Blog post number 1 <span class="date">September 02, 2015</span></span></a>
 					</div>
 					<div class="carousel-item">
-						<a href="blog-single.html"><img src="images/blog/blog-img-02.jpg" alt=""><span class="info">Blog post number 2 <span class="date">September 02, 2015</span></span></a>
+						<a href="blog-single.html"><img src="<?=base_url()?>images/blog/blog-img-02.jpg" alt=""><span class="info">Blog post number 2 <span class="date">September 02, 2015</span></span></a>
 					</div>
 					<div class="carousel-item">
-						<a href="blog-single.html"><img src="images/blog/blog-img-03.jpg" alt=""><span class="info">Blog post number 3 <span class="date">September 02, 2015</span></span></a>
+						<a href="blog-single.html"><img src="<?=base_url()?>images/blog/blog-img-03.jpg" alt=""><span class="info">Blog post number 3 <span class="date">September 02, 2015</span></span></a>
 					</div>
 					<div class="carousel-item">
-						<a href="blog-single.html"><img src="images/blog/blog-img-04.jpg" alt=""><span class="info">Blog post number 4 <span class="date">September 02, 2015</span></span></a>
+						<a href="blog-single.html"><img src="<?=base_url()?>images/blog/blog-img-04.jpg" alt=""><span class="info">Blog post number 4 <span class="date">September 02, 2015</span></span></a>
 					</div>
 					<div class="carousel-item">
-						<a href="blog-single.html"><img src="images/blog/blog-img-05.jpg" alt=""><span class="info">Blog post number 5 <span class="date">September 02, 2015</span></span></a>
+						<a href="blog-single.html"><img src="<?=base_url()?>images/blog/blog-img-05.jpg" alt=""><span class="info">Blog post number 5 <span class="date">September 02, 2015</span></span></a>
 					</div>
 					<div class="carousel-item">
-						<a href="blog-single.html"><img src="images/blog/blog-img-01.jpg" alt=""><span class="info">Blog post number 6 <span class="date">September 02, 2015</span></span></a>
+						<a href="blog-single.html"><img src="<?=base_url()?>images/blog/blog-img-01.jpg" alt=""><span class="info">Blog post number 6 <span class="date">September 02, 2015</span></span></a>
 					</div>
 					<div class="carousel-item">
-						<a href="blog-single.html"><img src="images/blog/blog-img-02.jpg" alt=""><span class="info">Blog post number 7 <span class="date">September 02, 2015</span></span></a>
+						<a href="blog-single.html"><img src="<?=base_url()?>images/blog/blog-img-02.jpg" alt=""><span class="info">Blog post number 7 <span class="date">September 02, 2015</span></span></a>
 					</div>
 					<div class="carousel-item">
-						<a href="blog-single.html"><img src="images/blog/blog-img-03.jpg" alt=""><span class="info">Blog post number 8 <span class="date">September 02, 2015</span></span></a>
+						<a href="blog-single.html"><img src="<?=base_url()?>images/blog/blog-img-03.jpg" alt=""><span class="info">Blog post number 8 <span class="date">September 02, 2015</span></span></a>
 					</div>
 				</div>
 			</div>
@@ -976,28 +977,28 @@
 		<div class="brands-carousel">
 			<div class="slides">
 				<div>
-					<a href="#"><img src="images/brand1.png" alt=""></a>
+					<a href="#"><img src="<?=base_url()?>images/brand1.png" alt=""></a>
 				</div>
 				<div>
-					<a href="#"><img src="images/brand2.png" alt=""></a>
+					<a href="#"><img src="<?=base_url()?>images/brand2.png" alt=""></a>
 				</div>
 				<div>
-					<a href="#"><img src="images/brand3.png" alt=""></a>
+					<a href="#"><img src="<?=base_url()?>images/brand3.png" alt=""></a>
 				</div>
 				<div>
-					<a href="#"><img src="images/brand4.png" alt=""></a>
+					<a href="#"><img src="<?=base_url()?>images/brand4.png" alt=""></a>
 				</div>
 				<div>
-					<a href="#"><img src="images/brand5.png" alt=""></a>
+					<a href="#"><img src="<?=base_url()?>images/brand5.png" alt=""></a>
 				</div>
 				<div>
-					<a href="#"><img src="images/brand6.png" alt=""></a>
+					<a href="#"><img src="<?=base_url()?>images/brand6.png" alt=""></a>
 				</div>
 				<div>
-					<a href="#"><img src="images/brand7.png" alt=""></a>
+					<a href="#"><img src="<?=base_url()?>images/brand7.png" alt=""></a>
 				</div>
 				<div>
-					<a href="#"><img src="images/brand8.png" alt=""></a>
+					<a href="#"><img src="<?=base_url()?>images/brand8.png" alt=""></a>
 				</div>
 			</div>
 		</div>
@@ -1069,7 +1070,7 @@
 					</div>
 					<div class="widget-outer">
 						<p>
-							<img src="images/img-about.jpg" alt="" class="img-responsive">
+							<img src="<?=base_url()?>images/img-about.jpg" alt="" class="img-responsive">
 						</p>
 						<p>
 							Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Maecenas eu enim in lorem scelerisque auctor. Ut non erat. Suspendisse fermentum posuere lectus. Fusce vulputate nibh egestas orci. Aliquam lectus. Morbi eget dolor ullamcorper massa pellentesque sagittis. Morbi sit amet quam labore diam nonumy.
@@ -1148,7 +1149,7 @@
 							<div class="carousel-item">
 								<div class="product">
 									<div class="preview-image-outer">
-										<a href="product.html" class="preview-image"><img class="img-responsive" src="images/products/product-02.jpg" alt=""></a>
+										<a href="product.html" class="preview-image"><img class="img-responsive" src="<?=base_url()?>images/products/product-02.jpg" alt=""></a>
 									</div>
 									<p class="name">
 										<a href="product.html">Product Example</a>
@@ -1162,7 +1163,7 @@
 							<div class="carousel-item">
 								<div class="product">
 									<div class="preview-image-outer">
-										<a href="product.html" class="preview-image"><img class="img-responsive" src="images/products/product-01.jpg" alt=""></a>
+										<a href="product.html" class="preview-image"><img class="img-responsive" src="<?=base_url()?>images/products/product-01.jpg" alt=""></a>
 									</div>
 									<p class="name">
 										<a href="product.html">Product Example</a>
@@ -1176,7 +1177,7 @@
 							<div class="carousel-item">
 								<div class="product">
 									<div class="preview-image-outer">
-										<a href="product.html" class="preview-image"><img class="img-responsive" src="images/products/product-03.jpg" alt=""></a>
+										<a href="product.html" class="preview-image"><img class="img-responsive" src="<?=base_url()?>images/products/product-03.jpg" alt=""></a>
 									</div>
 									<p class="name">
 										<a href="product.html">Product Example</a>
@@ -1190,7 +1191,7 @@
 							<div class="carousel-item">
 								<div class="product">
 									<div class="preview-image-outer">
-										<a href="product.html" class="preview-image"><img class="img-responsive" src="images/products/product-04.jpg" alt=""></a>
+										<a href="product.html" class="preview-image"><img class="img-responsive" src="<?=base_url()?>images/products/product-04.jpg" alt=""></a>
 									</div>
 									<p class="name">
 										<a href="product.html">Product Example</a>
@@ -1204,7 +1205,7 @@
 							<div class="carousel-item">
 								<div class="product">
 									<div class="preview-image-outer">
-										<a href="product.html" class="preview-image"><img class="img-responsive" src="images/products/product-05.jpg" alt=""></a>
+										<a href="product.html" class="preview-image"><img class="img-responsive" src="<?=base_url()?>images/products/product-05.jpg" alt=""></a>
 									</div>
 									<p class="name">
 										<a href="product.html">Product Example</a>
@@ -1218,7 +1219,7 @@
 							<div class="carousel-item">
 								<div class="product">
 									<div class="preview-image-outer">
-										<a href="product.html" class="preview-image"><img class="img-responsive" src="images/products/product-06.jpg" alt=""></a>
+										<a href="product.html" class="preview-image"><img class="img-responsive" src="<?=base_url()?>images/products/product-06.jpg" alt=""></a>
 									</div>
 									<p class="name">
 										<a href="product.html">Product Example</a>
@@ -1245,7 +1246,7 @@
 							<div class="carousel-item">
 								<div class="product">
 									<div class="preview-image-outer">
-										<a href="product.html" class="preview-image"><img class="img-responsive" src="images/products/product-04.jpg" alt=""></a>
+										<a href="product.html" class="preview-image"><img class="img-responsive" src="<?=base_url()?>images/products/product-04.jpg" alt=""></a>
 									</div>
 									<p class="name">
 										<a href="product.html">Product Example</a>
@@ -1259,7 +1260,7 @@
 							<div class="carousel-item">
 								<div class="product">
 									<div class="preview-image-outer">
-										<a href="product.html" class="preview-image"><img class="img-responsive" src="images/products/product-05.jpg" alt=""></a>
+										<a href="product.html" class="preview-image"><img class="img-responsive" src="<?=base_url()?>images/products/product-05.jpg" alt=""></a>
 									</div>
 									<p class="name">
 										<a href="product.html">Product Example</a>
@@ -1273,7 +1274,7 @@
 							<div class="carousel-item">
 								<div class="product">
 									<div class="preview-image-outer">
-										<a href="product.html" class="preview-image"><img class="img-responsive" src="images/products/product-02.jpg" alt=""></a>
+										<a href="product.html" class="preview-image"><img class="img-responsive" src="<?=base_url()?>images/products/product-02.jpg" alt=""></a>
 									</div>
 									<p class="name">
 										<a href="product.html">Product Example</a>
@@ -1287,7 +1288,7 @@
 							<div class="carousel-item">
 								<div class="product">
 									<div class="preview-image-outer">
-										<a href="product.html" class="preview-image"><img class="img-responsive" src="images/products/product-01.jpg" alt=""></a>
+										<a href="product.html" class="preview-image"><img class="img-responsive" src="<?=base_url()?>images/products/product-01.jpg" alt=""></a>
 									</div>
 									<p class="name">
 										<a href="product.html">Product Example</a>
@@ -1301,7 +1302,7 @@
 							<div class="carousel-item">
 								<div class="product">
 									<div class="preview-image-outer">
-										<a href="product.html" class="preview-image"><img class="img-responsive" src="images/products/product-03.jpg" alt=""></a>
+										<a href="product.html" class="preview-image"><img class="img-responsive" src="<?=base_url()?>images/products/product-03.jpg" alt=""></a>
 									</div>
 									<p class="name">
 										<a href="product.html">Product Example</a>
@@ -1315,7 +1316,7 @@
 							<div class="carousel-item">
 								<div class="product">
 									<div class="preview-image-outer">
-										<a href="product.html" class="preview-image"><img class="img-responsive" src="images/products/product-06.jpg" alt=""></a>
+										<a href="product.html" class="preview-image"><img class="img-responsive" src="<?=base_url()?>images/products/product-06.jpg" alt=""></a>
 									</div>
 									<p class="name">
 										<a href="product.html">Product Example</a>
@@ -1342,7 +1343,7 @@
 							<div class="carousel-item">
 								<div class="post">
 									<div class="image">
-										<a href="product.html" class="preview-image"><img class="img-responsive" src="images/img-resent-1.jpg" alt=""></a>
+										<a href="product.html" class="preview-image"><img class="img-responsive" src="<?=base_url()?>images/img-resent-1.jpg" alt=""></a>
 									</div>
 									<div class="text">
 										<div class="text">
@@ -1358,7 +1359,7 @@
 							<div class="carousel-item">
 								<div class="post">
 									<div class="image">
-										<a href="product.html" class="preview-image"><img class="img-responsive" src="images/img-resent-2.jpg" alt=""></a>
+										<a href="product.html" class="preview-image"><img class="img-responsive" src="<?=base_url()?>images/img-resent-2.jpg" alt=""></a>
 									</div>
 									<div class="text">
 										<div class="text">
@@ -1374,7 +1375,7 @@
 							<div class="carousel-item">
 								<div class="post">
 									<div class="image">
-										<a href="product.html" class="preview-image"><img class="img-responsive" src="images/img-resent-1.jpg" alt=""></a>
+										<a href="product.html" class="preview-image"><img class="img-responsive" src="<?=base_url()?>images/img-resent-1.jpg" alt=""></a>
 									</div>
 									<div class="text">
 										<div class="text">
@@ -1390,7 +1391,7 @@
 							<div class="carousel-item">
 								<div class="post">
 									<div class="image">
-										<a href="product.html" class="preview-image"><img class="img-responsive" src="images/img-resent-2.jpg" alt=""></a>
+										<a href="product.html" class="preview-image"><img class="img-responsive" src="<?=base_url()?>images/img-resent-2.jpg" alt=""></a>
 									</div>
 									<div class="text">
 										<div class="text">
@@ -1415,7 +1416,7 @@
 				</div>
 				<div class="pull-left padding-left">
 					<div class="small-photos">
-						<a href="gallery-single.html"><img src="images/flickr-photo-1.jpg" alt=""></a><a href="gallery-single.html"><img src="images/flickr-photo-2.jpg" alt=""></a><a href="gallery-single.html"><img src="images/flickr-photo-3.jpg" alt=""></a><a href="gallery-single.html"><img src="images/flickr-photo-4.jpg" alt=""></a><a href="gallery-single.html"><img src="images/flickr-photo-5.jpg" alt=""></a><a href="gallery-single.html"><img src="images/flickr-photo-6.jpg" alt=""></a><a href="gallery-single.html"><img src="images/flickr-photo-7.jpg" alt=""></a><a href="gallery-single.html"><img src="images/flickr-photo-8.jpg" alt=""></a><a href="gallery-single.html"><img src="images/flickr-photo-9.jpg" alt=""></a>
+						<a href="gallery-single.html"><img src="<?=base_url()?>images/flickr-photo-1.jpg" alt=""></a><a href="gallery-single.html"><img src="<?=base_url()?>images/flickr-photo-2.jpg" alt=""></a><a href="gallery-single.html"><img src="<?=base_url()?>images/flickr-photo-3.jpg" alt=""></a><a href="gallery-single.html"><img src="<?=base_url()?>images/flickr-photo-4.jpg" alt=""></a><a href="gallery-single.html"><img src="<?=base_url()?>images/flickr-photo-5.jpg" alt=""></a><a href="gallery-single.html"><img src="<?=base_url()?>images/flickr-photo-6.jpg" alt=""></a><a href="gallery-single.html"><img src="<?=base_url()?>images/flickr-photo-7.jpg" alt=""></a><a href="gallery-single.html"><img src="<?=base_url()?>images/flickr-photo-8.jpg" alt=""></a><a href="gallery-single.html"><img src="<?=base_url()?>images/flickr-photo-9.jpg" alt=""></a>
 					</div>
 					<div class="text-center">
 						<a class="btn-cool" href="#"> more photos </a>
@@ -1458,33 +1459,33 @@
 		</section>
 		<!-- //end Subscribe -->
 		<!-- Footer -->
-		<?php include('footer.php'); ?>
+		<?php $this->load->view('site/footer.php'); ?>
 		<div id="outer-overlay">
 		</div>
 		<!-- //end Footer -->
 	</div>
 </div>
 <!--[if lt IE 9]>
-    <script src="js/html5shiv.js"></script>
-    <script src="js/respond.min.js"></script>
+    <script src="<?=base_url()?>js/html5shiv.js"></script>
+    <script src="<?=base_url()?>js/respond.min.js"></script>
 <![endif]-->
-<script src="js/site/jquery-1.11.3.min.js"></script>
-<script src="js/site/modernizr.custom.02163.js"></script>
-<script src="js/site/jquery.finger.min.js"></script>
-<script src="js/site/doubletaptogo.js"></script>
-<script src="js/site/bootstrap.min.js"></script>
-<script src="js/site/jquery.easing.1.3.min.js"></script>
-<script src="js/site/slick.min.js"></script>
-<script src="js/site/jquery.parallax.min.js"></script>
-<script src="js/site/jquery.inview.min.js"></script>
-<script src="js/site/jquery.liMarquee.min.js"></script>
-<script src="js/site/jquery.colorbox-min.js"></script>
-<script src="js/site/jquery.plugin.min.js"></script>
-<script src="js/site/jquery.countdown.min.js"></script>
-<script src="js/site/coolbaby.js"></script>
+<script src="<?=base_url()?>js/site/jquery-1.11.3.min.js"></script>
+<script src="<?=base_url()?>js/site/modernizr.custom.02163.js"></script>
+<script src="<?=base_url()?>js/site/jquery.finger.min.js"></script>
+<script src="<?=base_url()?>js/site/doubletaptogo.js"></script>
+<script src="<?=base_url()?>js/site/bootstrap.min.js"></script>
+<script src="<?=base_url()?>js/site/jquery.easing.1.3.min.js"></script>
+<script src="<?=base_url()?>js/site/slick.min.js"></script>
+<script src="<?=base_url()?>js/site/jquery.parallax.min.js"></script>
+<script src="<?=base_url()?>js/site/jquery.inview.min.js"></script>
+<script src="<?=base_url()?>js/site/jquery.liMarquee.min.js"></script>
+<script src="<?=base_url()?>js/site/jquery.colorbox-min.js"></script>
+<script src="<?=base_url()?>js/site/jquery.plugin.min.js"></script>
+<script src="<?=base_url()?>js/site/jquery.countdown.min.js"></script>
+<script src="<?=base_url()?>js/site/coolbaby.js"></script>
 <!-- SLIDER REVOLUTION 4.x SCRIPTS  -->
-<script type="text/javascript" src="rs-plugin/js/jquery.themepunch.plugins.min.js"></script>
-<script type="text/javascript" src="rs-plugin/js/jquery.themepunch.revolution.min.js"></script>
-<script type="text/javascript" src="rs-plugin/js/jquery.themepunch.ini.js"></script>
+<script type="text/javascript" src="<?=base_url()?>rs-plugin/js/jquery.themepunch.plugins.min.js"></script>
+<script type="text/javascript" src="<?=base_url()?>rs-plugin/js/jquery.themepunch.revolution.min.js"></script>
+<script type="text/javascript" src="<?=base_url()?>rs-plugin/js/jquery.themepunch.ini.js"></script>
 </body>
 </html>

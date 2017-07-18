@@ -51,7 +51,7 @@
 									<div class="list animate-delay-outer">
 										<div class="item animate-delay fadeInRight">
 											<div class="image">
-												<a href="product.html" class="preview-image"><img src="images/products/product-03.jpg" alt=""></a>
+												<a href="product.html" class="preview-image"><img src="<?=base_url()?>images/products/product-03.jpg" alt=""></a>
 											</div>
 											<div class="description">
 												<a href="#">Mauris et ligula quis</a><strong class="price">1 x $44.95</strong>
@@ -62,7 +62,7 @@
 										</div>
 										<div class="item animate-delay fadeInRight">
 											<div class="image">
-												<a href="product.html" class="preview-image"><img src="images/products/product-05.jpg" alt=""></a>
+												<a href="product.html" class="preview-image"><img src="<?=base_url()?>images/products/product-05.jpg" alt=""></a>
 											</div>
 											<div class="description">
 												<a href="#">Mauris et ligula quis</a><strong class="price">1 x $44.95</strong>
@@ -91,7 +91,7 @@
 		</div>
 		<!-- Back to top -->
 		<div class="back-to-top">
-			<span class="arrow-up"><img src="images/icon-scroll-arrow.png" alt=""></span><img src="images/icon-scroll-mouse.png" alt="">
+			<span class="arrow-up"><img src="<?=base_url()?>images/icon-scroll-arrow.png" alt=""></span><img src="<?=base_url()?>images/icon-scroll-mouse.png" alt="">
 		</div>
 		<!-- //end Back to top -->
 		<section class="navbar">
@@ -112,7 +112,7 @@
 							<!-- //end Mobile menu Button -->
 							<!-- Logo -->
 							<div class="navbar-logo col-xs-10 col-sm-10 col-md-6 text-center">
-								<a href="index.html"><img src="images/logo.png" alt="Coolbaby"></a>
+								<a href="index.html"><img src="<?=base_url()?>images/logo.png" alt="Coolbaby"></a>
 							</div>
 							<!-- //end Logo -->
 							<div class="clearfix visible-xs">
@@ -172,7 +172,7 @@
 				</div>
 			</div>
 			<!-- Main menu -->
-			<?php include('main_menu.php');?>
+			<?php $this->load->view('site/main_menu.php');?>
 			<!-- //end Main menu -->
 		</div>
 		</section>

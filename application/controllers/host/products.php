@@ -98,6 +98,12 @@ class Products extends MY_Controller {
 			$price = $this->input->post('price');
 			$filters = $this->input->post('filters');
 			
+			$product_seo = url_title($product_name, '-', TRUE);
+			$product_name_check = $this->product_model->get_all_details(PRODUCT,array('product_seo'=>$product_seo,'category_id'=>$category_id));
+			if($product_name_check->num_rows > 0){
+				$this->setErrorMessage('error','Product name already exists in this category' );
+				redirect(ADMIN_PATH.'/products/add_edit_product_form');
+			}
 			
 			
 			if(isset($tax) && $tax <= 0){
@@ -121,6 +127,7 @@ class Products extends MY_Controller {
 			$excludeArr = array('product_id','filters','sub_category_id','stock_count','tax');
 			$dataArr = array(
 					'product_name' => $product_name,
+					'product_seo' => url_title($product_name, '-', TRUE),
 					'category_id'=>$category_id,
 					'sub_category_id'=>$sub_category_id,
 					'product_featured'=>$featuredstatus,
@@ -131,21 +138,34 @@ class Products extends MY_Controller {
 					'status'=>$newstatus
 				);
 			if ($_FILES['product_image']['size']>0) {
+				$data = getimagesize($_FILES['product_image']['tmp_name']);
+			
+				$width = $data[0];
+				$height = $data[1];
+			if($width==800 && $height==1077)
+			{
 				$config['encrypt_name'] = TRUE;
 				$config['overwrite'] = FALSE;
 				$config['allowed_types'] = 'jpg|jpeg|gif|png';
 				$config['max_size'] = 2000;
-				$config['upload_path'] = './images/products';
+				$config['upload_path'] = './images/products/800x1077';
 				$this->load->library('upload', $config);
 				if ($this->upload->do_upload('product_image')){
 					$productDetails = $this->upload->data();
+					$this->resize_image_one($productDetails);
+					
 					$dataArr['image'] = $productDetails['file_name'];
 				}else{
 					$productDetails = $this->upload->display_errors();
 					$this->setErrorMessage('error',strip_tags($productDetails));
 					redirect(ADMIN_PATH.'/products/add_edit_product_form/'.$product_id);
 				}
+			}else{
+				$this->setErrorMessage('error','Please upload image in correct size...');
+					redirect(ADMIN_PATH.'/products/add_edit_product_form');
+				
 			}
+		}
 			
 			//print_r($dataArr);die;
 			
@@ -170,6 +190,89 @@ class Products extends MY_Controller {
 			redirect(ADMIN_PATH.'/products/display_products');
 		}
 	}
+	
+	
+	/* public function resize_image_one($image_data){
+    $this->load->library('image_lib');
+    $w = $image_data['image_width']; // original image's width
+    $h = $image_data['image_height']; // original images's height
+	$image_name = $image_data['file_name'];
+    $n_w = 170; // destination image's width
+    $n_h = 220; // destination image's height
+
+    $source_ratio = $w / $h;
+    $new_ratio = $n_w / $n_h;
+    if($source_ratio != $new_ratio){
+
+        $config['image_library'] = 'gd2';
+        $config['source_image'] = './images/products/800x1077/'.$image_name;
+        $config['maintain_ratio'] = FALSE;
+        if($new_ratio > $source_ratio || (($new_ratio == 1) && ($source_ratio < 1))){
+            $config['width'] = $w;
+            $config['height'] = round($w/$new_ratio);
+            $config['y_axis'] = round(($h - $config['height'])/2);
+            $config['x_axis'] = 0;
+
+        } else {
+
+            $config['width'] = round($h * $new_ratio);
+            $config['height'] = $h;
+            $size_config['x_axis'] = round(($w - $config['width'])/2);
+            $size_config['y_axis'] = 0;
+
+        }
+
+        $this->image_lib->initialize($config);
+        $this->image_lib->crop();
+        $this->image_lib->clear();
+    }
+    $config['image_library'] = 'gd2';
+	$config['source_image'] = './images/products/800x1077/'.$image_name;
+    $config['new_image'] = './images/products/170x220/'.$image_name;
+    $config['maintain_ratio'] = TRUE;
+    $config['width'] = $n_w;
+    $config['height'] = $n_h;
+    $this->image_lib->initialize($config);
+
+    if (!$this->image_lib->resize()){
+
+        echo $this->image_lib->display_errors();
+
+    }
+} */
+
+		public function resize_image_one($image_data){
+    $this->load->library('image_lib');
+    $w = $image_data['image_width']; // original image's width
+    $h = $image_data['image_height']; // original images's height
+	$image_name = $image_data['file_name'];
+ 
+
+ /* First size */
+ $configSize1['image_library']   = 'gd2';
+$configSize1['source_image'] = './images/products/800x1077/'.$image_name;
+    $configSize1['new_image'] = './images/products/170x220/'.$image_name;
+ $configSize1['maintain_ratio']  = TRUE;
+ $configSize1['width']           = 170;
+ $configSize1['height']          = 220;
+
+ $this->image_lib->initialize($configSize1);
+ $this->image_lib->resize();
+ $this->image_lib->clear();
+
+ /* Second size */    
+ $configSize2['image_library']   = 'gd2';
+$configSize2['source_image'] = './images/products/800x1077/'.$image_name;
+    $configSize2['new_image'] = './images/products/390x525/'.$image_name;
+ $configSize2['create_thumb']    = TRUE;
+ $configSize2['maintain_ratio']  = TRUE;
+ $configSize2['width']           = 390;
+ $configSize2['height']          = 525;
+
+ $this->image_lib->initialize($configSize2);
+ $this->image_lib->resize();
+ $this->image_lib->clear();
+}
 	
 	/**
 	* 
@@ -237,6 +340,7 @@ class Products extends MY_Controller {
 	
 	public function fetch_sub_categories_id(){
 		$cat_id = $_POST['category_id'];
+		if($cat_id!='') {
 		$sub_categories = $this->product_model->get_all_details(CATEGORIES,array('rootId'=>$cat_id));
 		if($sub_categories->num_rows() > 0){
 			$status = 1;
@@ -244,6 +348,10 @@ class Products extends MY_Controller {
 			$status = 0;
 		}
 		echo json_encode(array('data' => $sub_categories->result_array(),'status' => $status));
+	}
+		else {
+			echo json_encode(array('status' => 0));
+	}
 	}
 	
 	/* This will get filters of sub category */

@@ -53,7 +53,7 @@ extract($privileges);
 										<a><i class="fa fa-cogs"></i> Categories <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu <?php if($currentMgt=='categories'){ ?>nav-open<?php } ?>">
 											<?php if((in_array(0,$categories)) || $allPrev==1){ ?>
-                      <li <?php if($currentPage=='display_categories' || $currentPage=='view_categories' || $currentPage=='view_sub_categories'){ ?>class="current-page"<?php } ?>><a href="<?php echo ADMIN_PATH; ?>/categories/display_categories">Categorise List</a></li>
+                      <li <?php if($currentPage=='display_categories' || $currentPage=='view_categories'){ ?>class="current-page"<?php } ?>><a href="<?php echo ADMIN_PATH; ?>/categories/display_categories">Categorise List</a></li>
 											<?php } ?>
 											<?php if((in_array(1,$categories)) || $allPrev==1){ ?>
                       <li <?php if($currentPage=='add_edit_categories_form'){ ?>class="current-page"<?php } ?>><a href="<?php echo ADMIN_PATH; ?>/categories/add_edit_categories_form">Add Category</a></li>
@@ -61,16 +61,23 @@ extract($privileges);
                     </ul>
                   </li>
 									<?php } ?>
+<<<<<<< HEAD
+									
+=======
 									<?php if((isset($filters) && is_array($filters)) || $allPrev==1){ ?>
 									<li <?php if($currentMgt=='filters'){ ?>class="active"<?php } ?>>
 										<a><i class="fa fa-cogs"></i> Filters <span class="fa fa-chevron-down"></span></a>
-                    <ul class="nav child_menu" <?php if($currentMgt=='filters'){ ?> style ="display: block;"<?php } ?>>
-											<?php if((in_array($filters)) || $allPrev==1){ //echo $currentPage;die; ?>
-                      <li <?php if($currentPage=='add_edit_filters_form' || $currentPage=='editFilter' || $currentPage=='addFilterValues' || $currentPage=='editFilterValue'){ ?>class="current-page"<?php } ?>><a href="<?php echo ADMIN_PATH; ?>/filters/add_edit_filters_form">Filters</a></li>
+                    <ul class="nav child_menu <?php if($currentMgt=='filters'){ ?>nav-open<?php } ?>">
+											<?php if((in_array(0,$filters)) || $allPrev==1){ ?>
+                      <li <?php if($currentPage=='display_filters' || $currentPage=='view_filters'){ ?>class="current-page"<?php } ?>><a href="<?php echo ADMIN_PATH; ?>/filters/display_filters">Filters List</a></li>
+											<?php } ?>
+											<?php if((in_array($filters)) || $allPrev==1){ ?>
+                      <li <?php if($currentPage=='add_edit_filters_form'){ ?>class="current-page"<?php } ?>><a href="<?php echo ADMIN_PATH; ?>/filters/add_edit_filters_form">Add Filters</a></li>
 											<?php } ?>
                     </ul>
                   </li>
 									<?php } ?>
+>>>>>>> sunil
 									<?php if((isset($options) && is_array($options)) || $allPrev==1){ ?>
 									<li <?php if($currentMgt=='options'){ ?>class="active"<?php } ?>>
 										<a><i class="fa fa-tasks"></i> Options <span class="fa fa-chevron-down"></span></a>

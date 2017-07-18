@@ -3,7 +3,11 @@ $config['id'] = '1';
 $config['created'] = '2016-09-01'; 
 $config['modified'] = '2016-09-01'; 
 $config['admin_name'] = 'jimmy'; 
+<<<<<<< HEAD
 $config['email'] = 'shabeer77777@gmail.com'; 
+=======
+$config['email'] = 'jimmytamzh@gmail.com'; 
+>>>>>>> sunil
 $config['admin_image'] = '3e135a203e9410a55990b0928c73512a.png'; 
 $config['admin_type'] = 'super'; 
 $config['privileges'] = ''; 

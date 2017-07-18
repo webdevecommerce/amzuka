@@ -45,7 +45,7 @@
 				<div class="">
 					<div class="page-title">
 						<div class="title_left">
-							<h3><?php echo $heading; ?></h3>
+							<h3><?php if($headingname!='') echo $headingname; ?>&nbsp;<?php echo $heading; ?></h3>
 						</div>
 					</div>
 					<div class="clearfix"></div>

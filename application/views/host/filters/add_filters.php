@@ -58,7 +58,7 @@ $this->load->view(ADMIN_PATH.'/templates/header',$this->data);
 							<?php //echo '<pre>'; print_r($filters_details->result());die; ?>
 								<th scope="row"><?php echo $key+1; ?></th>
 							  <td><?php echo $details->filter_name; ?></td>
-								<td><button type="button" class="btn btn-primary"><a href="<?php echo ADMIN_PATH; ?>/filters/addFilterValues/<?php echo $details->id; ?>"  style="color:white;">Show or Add values</a></button></td>
+								<td><button type="button" class="btn btn-primary"><a href="<?php echo ADMIN_PATH; ?>/filters/addFilterValues/<?php echo $details->id; ?>"  style="color:white;">Add/Show values</a></button></td>
 							  <td><?php echo $details->status; ?></td>
 							  <td><a href="<?php echo ADMIN_PATH; ?>/filters/editFilter/<?php echo $details->id; ?>" class=".btn-primary" style="color:blue;">Edit</a> | <a href="<?php echo ADMIN_PATH; ?>/filters/deleteFilter/<?php echo $details->id; ?>" class=".btn-primary" style="color:blue;">Delete</a></td>
 							</tr><?php } ?>

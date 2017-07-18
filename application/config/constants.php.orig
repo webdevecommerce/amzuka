@@ -71,8 +71,11 @@ define('ORDERS',							'orders');
 define('OPTIONS',							'options');
 define('FILTERS',							'filters');
 define('OPTIONS_VALUES',			'options_values');
+<<<<<<< HEAD
+define('FILTER_VALUES',			'filter_values');
+=======
 define('FILTERVALUES',			'filter_values');
-define('PRODUCT_FILTERS',			'product_filter_values');
+>>>>>>> 9f890c34ccc1feb3a11e11dc169d483ca76b1b1d
 
 /*
 |--------------------------------------------------------------------------

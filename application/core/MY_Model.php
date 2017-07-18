@@ -103,6 +103,34 @@ class MY_Model extends CI_Model {
 		return $this->db->get_where($table,$condition);
 	}	
 	
+	
+	/**
+	| 
+	| 	This function returns the selected fields
+	| 	@param String $table
+	| 	@param Array $condition
+	| 	@param Array $sortArr
+	|
+	**/
+	public function get_selected_fields($table='',$selectArray= array(),$condition='',$sortArr='',$limitOffset=''){
+		if ($sortArr != '' && is_array($sortArr)){
+			foreach ($sortArr as $sortRow){
+				if (is_array($sortRow)){
+					$this->db->order_by($sortRow['field'],$sortRow['type']);
+				}
+			}
+		}
+		if ($sortArr != '' && is_array($sortArr)){
+			$offset = 0; if(array_key_exists('offset',$limitOffset)) $offset = $limitOffset['offset'];
+			$limit = 0; if(array_key_exists('limit',$limitOffset))  $limit = $limitOffset['limit'];
+			$this->db->limit($limit, $offset);
+		}
+		if(!empty($selectArray)){
+			$this->db->select($selectArray);
+		}
+		return $this->db->get_where($table,$condition);
+	}
+	
 	/**
 	| 
 	| 	For getting last insert id
@@ -250,3 +278,6 @@ class MY_Model extends CI_Model {
 		}
 	}
 }
+
+
+?>

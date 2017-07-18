@@ -13,7 +13,6 @@ $this->load->view(ADMIN_PATH.'/templates/header',$this->data);
 					<th>Name</th>
 					<th>Status</th>
 					<th>Featured</th>
-					<th>Subcategory</th>
 					<th>Actions</th>
 				</tr>
 			</thead>
@@ -65,11 +64,6 @@ $this->load->view(ADMIN_PATH.'/templates/header',$this->data);
 						<?php }else if($mode<0){?>
 							<span class="label label-default lbl"><?php echo $row->featured; ?></span>
 						<?php }?>
-					</td>
-					<td>
-					<a class="btn btn-primary" href="<?php echo ADMIN_PATH; ?>/categories/view_sub_categories/<?php echo $row->id; ?>">
-					Subcategory List
-					</a>
 					</td>
 					<td>
 						<div class="btn-group">

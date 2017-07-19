@@ -154,6 +154,7 @@ $this->load->view(ADMIN_PATH.'/templates/header',$this->data);
 								dataType:"JSON",
 								success: function(response){
 									if(response.status == '1'){
+										$("#allfilterOptions").html('');
 											$("#prod_sub_cat")
 										.find('option')
 										.remove()
@@ -170,7 +171,9 @@ $this->load->view(ADMIN_PATH.'/templates/header',$this->data);
 										.find('option')
 										.remove()
 										.end()
-										.append('<option value="">No Sub Categories Found</option>')
+										.append('<option value="">No Sub Categories Found</option>');
+										$("#allfilterOptions").html('');
+										
 									}
 								}
 						});
@@ -199,7 +202,7 @@ $this->load->view(ADMIN_PATH.'/templates/header',$this->data);
 											$('#allfilterOptions').append(selectDiv);
 										}
 									}else{
-										
+										$("#allfilterOptions").html('');
 									}
 								}
 						});

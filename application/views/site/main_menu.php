@@ -3,7 +3,7 @@
 					<dl class="navbar-main-menu">
 						<dt class="item"><a href="<?php echo base_url(); ?>" class="btn-main"><span class="icon icon-xl flaticon-home113"></span></a></dt>
 						<dd></dd>
-						<?php //echo '<pre>';print_r($rootCategories->result());die; ?> 
+						<?php  //echo '<pre>';print_r($rootCategories->result());die; ?> 
 						<?php
 						foreach($rootCategories->result() as $cat) { ?>
 						<dt class="item"><a href="#" class="btn-main line"><?php echo $cat->name;?></a></dt>

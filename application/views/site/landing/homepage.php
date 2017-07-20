@@ -87,13 +87,13 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-xs-12 col-sm-4 col-lg-4">
-					<a href="index.html" class="item anim-icon"><span class="icon"><img src="<?=base_url()?>images/anim-icon-1.gif" data-hover="images/anim-icon-1-hover.gif" alt=""/></span><span class="title">Free shipping on orders over $200</span></a>
+					<a href="index.html" class="item anim-icon"><span class="icon"><img src="<?=base_url()?>images/anim-icon-1.gif" data-hover="images/anim-icon-1-hover.gif" alt=""/></span><span class="title">Free shipping</span></a>
 				</div>
 				<div class="col-xs-12 col-sm-4 col-lg-4">
-					<a href="index.html" class="item anim-icon"><span class="icon"><img src="<?=base_url()?>images/anim-icon-2.gif" data-hover="images/anim-icon-2-hover.gif" alt=""/></span><span class="title">30-day returns</span></a>
+					<a href="index.html" class="item anim-icon"><span class="icon"><img src="<?=base_url()?>images/anim-icon-2.gif" data-hover="images/anim-icon-2-hover.gif" alt=""/></span><span class="title">15-day returns</span></a>
 				</div>
 				<div class="col-xs-12 col-sm-4 col-lg-4">
-					<a href="index.html" class="item anim-icon"><span class="icon"><img src="<?=base_url()?>images/anim-icon-3.gif" data-hover="images/anim-icon-3-hover.gif" alt=""/></span><span class="title">24/7 Support </span></a>
+					<a href="index.html" class="item anim-icon"><span class="icon"><img src="<?=base_url()?>images/anim-icon-3.gif" data-hover="images/anim-icon-3-hover.gif" alt=""/></span><span class="title">Support </span></a>
 				</div>
 			</div>
 		</div>

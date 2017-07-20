@@ -37,7 +37,7 @@
 | in the URL cannot be matched to a valid route.
 |
 */
-$route[''] = "site/landing/homepage";
+//$route[''] = "site/landing/homepage";
 $route['default_controller'] = "site/landing";
 $route['404_override'] = '';
 
@@ -66,6 +66,6 @@ $route['reset-password/(:any)'] = "site/users/reset_password_form";
 $route['update-new-password'] = "site/users/update_new_password";
 
 /* Added by sunil */
-$route['cat/(:any)/(:any)'] = "site/category/viewCategory/$1/$2";
+$route['(:any)'] = "site/category/index/$1/$2";
 /* End of file routes.php */
 /* Location: ./application/config/routes.php */

@@ -8,7 +8,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="">
 <meta name="author" content="">
-<title>Coolbaby template</title>
+<title><?php echo $heading; ?></title>
 <link rel="shortcut icon" href="favicon.ico">
 <!-- Bootstrap core CSS -->
 <link href="<?=base_url()?>css/site/bootstrap.css" rel="stylesheet">

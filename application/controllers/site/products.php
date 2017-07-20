@@ -14,9 +14,7 @@ class Products extends MY_Controller {
 		$this->load->library(array('encrypt','form_validation'));		
 		$this->load->model('product_model');
 		$this->load->model('categories_model');
-		if ($this->checkPrivileges('product',$this->privStatus) == FALSE){
-			redirect(ADMIN_PATH);
-		}
+		
 	}
     
 	/**
@@ -25,18 +23,25 @@ class Products extends MY_Controller {
 	*
 	**/
 	public function index(){	
-		if ($this->checkLogin('A') == ''){
-			redirect(ADMIN_PATH);
-		}else {
+		
 				//$product_seo = $this->uri->segment(1);
 				$product_seo = 'very-different';
 				
 				$productArr = $this->product_model->get_all_details(PRODUCT,array('product_seo' => $product_seo));
 				print_r($productArr->row());die;
 				redirect(ADMIN_PATH.'/product/display_products');
-		}
+		
 	}
 	
+	public function productDetail(){
+			$id= $this->uri->segment(2);
+			$this->data['productArr'] = $this->product_model->get_all_details(PRODUCT,array('id' => $id));
+			$this->data['rootCategories'] = $this->product_model->get_all_details(CATEGORIES,array('rootID'=>0,'status'=>'Active'));
+			$this->data['subCategories'] = $this->product_model->get_all_details(CATEGORIES,array('rootID !=' => 0,'status'=>'Active'));
+			//echo '<pre>'; print_r($this->data['productArr']->result());die;
+			$this->load->view('site/product/product_detail',$this->data);
+		
+	}
 	
 }
 

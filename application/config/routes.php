@@ -67,5 +67,6 @@ $route['update-new-password'] = "site/users/update_new_password";
 
 /* Added by sunil */
 $route['(:any)'] = "site/category/index/$1/$2";
+$route['product_detail/15'] = "site/products/productDetail";
 /* End of file routes.php */
 /* Location: ./application/config/routes.php */

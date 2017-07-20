@@ -115,7 +115,7 @@
 					<?php //foreach($sliders->result() as $img) { ?>
 					<!--<img src="<?=base_url()?>images/dummy.png" alt="slide1" data-lazyload="images/slider/<?php echo $img->slide; ?>">-->
 					<?php //} ?>
-					<img src="<?=base_url()?>images/dummy.png" alt="slide1" data-lazyload="images/sliders/slide1.png">
+					<img src="<?=base_url()?>images/dummy.png" alt="slide1" data-lazyload="<?=base_url()?>images/sliders/slide1.png">
 					<!-- LAYERS img 1 -->
 					<div class="tp-caption fadein fadeout rs-parallaxlevel-1" data-x="500" data-y="0" data-speed="1000" data-start="500" data-easing="Power3.easeInOut" data-elementdelay="0.1" data-endelementdelay="0.1" style="z-index: 4;">
 						<img src="<?=base_url()?>images/sliders/slide1-1.png" alt="">

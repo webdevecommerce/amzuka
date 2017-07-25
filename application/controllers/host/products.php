@@ -161,7 +161,7 @@ class Products extends MY_Controller {
 					redirect(ADMIN_PATH.'/products/add_edit_product_form/'.$product_id);
 				}
 			}else{
-				$this->setErrorMessage('error','Please upload image in correct size...');
+				$this->setErrorMessage('error','Please upload image in 800x1077 size...');
 					redirect(ADMIN_PATH.'/products/add_edit_product_form');
 				
 			}

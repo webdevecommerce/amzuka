@@ -65,8 +65,9 @@ $route['send-user-reset-password-link'] = "site/users/send_user_reset_password_l
 $route['reset-password/(:any)'] = "site/users/reset_password_form";
 $route['update-new-password'] = "site/users/update_new_password";
 
+$route['view/(:any)'] = "site/products/productDetail";
 /* Added by sunil */
 $route['(:any)'] = "site/category/index/$1/$2";
-$route['product_detail/15'] = "site/products/productDetail";
+
 /* End of file routes.php */
 /* Location: ./application/config/routes.php */

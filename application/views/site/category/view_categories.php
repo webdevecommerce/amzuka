@@ -147,11 +147,11 @@
 				<div class="product-preview">
 					<div class="preview">
 						<div class="preview-image-outer">
-							<a href="product.html" class="preview-image"><img class="img-responsive img-default" src="<?php echo base_url(); ?>images/products/170x220/<?php echo $product->image; ?>" alt=""><img class="img-responsive img-second" src="<?php echo base_url(); ?>images/products/170x220/<?php echo $product->image; ?>" alt=""></a>
+							<a href="<?php echo base_url().'view/'.$product->product_seo; ?>" class="preview-image"><img class="img-responsive img-default" src="<?php echo base_url(); ?>images/products/170x220/<?php echo $product->image; ?>" alt=""><img class="img-responsive img-second" src="<?php echo base_url(); ?>images/products/170x220/<?php echo $product->image; ?>" alt=""></a>
 						</div>
 						<a href="_ajax_view-product.html" class="quick-view"><span>Quick View</span></a>
 					</div>
-					<h3 class="title"><a href="product.html"><?php echo $product->product_name; ?></a></h3>
+					<h3 class="title"><a href="<?php echo base_url().'view/'.$product->product_seo; ?>"><?php echo $product->product_name; ?></a></h3>
 					<span class="price new"><?php echo $product->price; ?></span><span class="price old"><?php echo $product->price; ?></span>
 					<ul class="product-controls-list">
 						<li><a href="#"><span class="icon flaticon-heart68"></span></a></li>

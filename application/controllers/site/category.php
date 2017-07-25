@@ -18,11 +18,10 @@ class Category extends MY_Controller {
 		$this->data['subCategories'] = $this->landing_model->get_all_details(CATEGORIES,array('rootID !=' => 0,'status'=>'Active'));
 	}
 	
-	
 	public function index(){
 		$category = $this->uri->segment(1);
 		$sub_category = $this->uri->segment(2);
-		if($category != '' && $sub_category != ''){
+		if($category != '' && $sub_category != '' && $category != 'product_detail'){
 				$this->data['rootCategory'] = $this->categories_model->get_all_details(CATEGORIES,array('rootID'=>0,'status'=>'Active','url_title' => $this->uri->segment(1)));
 				//echo $this->data['rootCategories']->num_rows();die;
 				if($this->data['rootCategory']->num_rows() > 0){

@@ -34,8 +34,8 @@ class Products extends MY_Controller {
 	}
 	
 	public function productDetail(){
-			$id= $this->uri->segment(2);
-			$this->data['productArr'] = $this->product_model->get_all_details(PRODUCT,array('id' => $id));
+			$product_seo= $this->uri->segment(2);
+			$this->data['productArr'] = $this->product_model->get_all_details(PRODUCT,array('product_seo' => $product_seo));
 			$this->data['rootCategories'] = $this->product_model->get_all_details(CATEGORIES,array('rootID'=>0,'status'=>'Active'));
 			$this->data['subCategories'] = $this->product_model->get_all_details(CATEGORIES,array('rootID !=' => 0,'status'=>'Active'));
 			//echo '<pre>'; print_r($this->data['productArr']->result());die;

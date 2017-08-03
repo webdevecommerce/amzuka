@@ -17,10 +17,10 @@ $this->load->view(ADMIN_PATH.'/templates/header',$this->data);
 					?>
 						<div class="form-group">
 							<input type="hidden" name="filter_id"  value="<?php echo $this->data['cur_id']; ?>"/>
-							<label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">Name <span class="required">*</span>
+							<label class="control-label col-md-3 col-sm-3 col-xs-12" for="name"><?php if($this->uri->segment(4) == 12){ echo "Select Color"; }else{ echo "Name"; } ?> <span class="required">*</span>
 							</label>
 							<div class="col-md-9 col-sm-9 col-xs-12">
-								<input type="text" name="value" id="value" required class="form-control col-md-7 col-xs-12" value="" />
+								<input type="text" name="value" id="<?php if($this->uri->segment(4) == 12){ echo "color-picker"; }else{ echo "value"; } ?>" required class="form-control col-md-7 col-xs-12" value="" />
 							</div>
 						</div>
 						<div class="ln_solid"></div>
@@ -45,7 +45,12 @@ $this->load->view(ADMIN_PATH.'/templates/header',$this->data);
 							<tr>
 							<?php //echo '<pre>'; print_r($filters_details->result());die; ?>
 								<th scope="row"><?php echo $key+1; ?></th>
-							  <td><?php echo $details->value; ?></td>
+								<?php if($this->uri->segment(4) == 12){ ?>
+									<td><span class="color-box" style="background:<?php echo $details->value; ?>"></span></td>
+								<?php }else { ?>
+									<td><?php echo $details->value; ?></td>
+								<?php } ?>
+							  
 								<td><a href="<?php echo ADMIN_PATH; ?>/filters/editFilterValue/<?php echo $details->id; ?>" class=".btn-primary" style="color:blue;">Edit</a> | <a href="<?php echo ADMIN_PATH; ?>/filters/deleteFilterValue/<?php echo $details->id; ?>/<?php echo $this->uri->segment(4); ?>" class=".btn-primary" style="color:blue;">Delete</a></td>
 							</tr><?php } ?>
 							</tbody>
@@ -56,8 +61,11 @@ $this->load->view(ADMIN_PATH.'/templates/header',$this->data);
 			</div>
 		</div>
 </div>
-
-
+<style>
+.color-box{
+	float:left;height:32px;width:32px;border:1px solid rgba(0, 0, 0, .2);
+}
+</style>
 <?php 
 $this->load->view(ADMIN_PATH.'/templates/footer',$this->data); 
 ?>

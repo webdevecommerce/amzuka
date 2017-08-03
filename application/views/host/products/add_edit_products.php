@@ -74,6 +74,37 @@ $this->load->view(ADMIN_PATH.'/templates/header',$this->data);
 									
 								</div>
 						</div>
+						
+						<div class="form-group">
+							<label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">Stock available in sizes<span class="required">*</span>
+							</label>
+							<div class="col-md-9 col-sm-9 col-xs-12" class="static_filters">
+								<?php foreach($sizeFilters->result() as $size){ ?>
+									<p class="filll"><strong><?php echo $size->value; ?></strong></p>
+									<input type="text" class="fil" name="size[<?php echo $size->id; ?>]" required class="form-control col-md-3 col-sm-3 col-xs-12" value="" />
+								<?php } ?>
+							</div>
+						</div>
+						<style>
+							.static_filters fil{
+								display:inline-block;
+							}
+						</style>
+						
+						<div class="form-group">
+							<label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">Color<span class="required">*</span>
+							</label>
+							<div class="col-md-9 col-sm-9 col-xs-12">
+								<?php foreach($colorFilters->result() as $color){ ?>
+									<!-- <input type="text" name="color[]" required class="form-control col-md-3 col-sm-3 col-xs-12" value="<?php if($edit_mode) echo $product_details->row()->price; ?>" /> -->
+									<input type="checkbox" value="<?php echo $color->value; ?>" style="float:left; margin-left:10px" name="color[<?php echo $color->id; ?>]"/>
+									<div class="product-color-box " style="background:<?php echo $color->value; ?>" data-color-id="<?php echo $color->value; ?>"></div>
+								<?php } ?>
+							</div>
+						</div>
+						
+						
+						
 						<div class="form-group">
 							<label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">Price<span class="required">*</span>
 							</label>
@@ -103,6 +134,13 @@ $this->load->view(ADMIN_PATH.'/templates/header',$this->data);
 							</label>
 							<div class="col-md-9 col-sm-9 col-xs-12">
 								<input type="text" name="shipping_cost" id="shipping_cost" required class="form-control col-md-7 col-xs-12" value="<?php if($edit_mode) echo $product_details->row()->shipping_cost; ?>" />
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="control-label col-md-3 col-sm-3 col-xs-12" for="description">Description<span class="required">*</span>
+							</label>
+							<div class="col-md-9 col-sm-9 col-xs-12">
+								<textarea name="description" required class="form-control col-md-7 col-xs-12" value="<?php if($edit_mode) echo $product_details->row()->description; ?>" ></textarea>
 							</div>
 						</div>
 						
@@ -142,9 +180,9 @@ $this->load->view(ADMIN_PATH.'/templates/header',$this->data);
 	</div>
 </div>
 <link rel="stylesheet" href="css/host/picker.min.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="<?=base_url()?>js/site/jquery-1.11.3.min.js"></script>
 <script type="text/javascript">
-		$(document).ready(function(){
+		jQuery(document).ready(function($){
 			$("#prod_cat").change(function(){
 					  cat_id = $(this).val();
 						$.ajax({
@@ -213,6 +251,43 @@ $this->load->view(ADMIN_PATH.'/templates/header',$this->data);
 		});
 </script>
 
+<style>
+	.product-color-box{
+		float:left;height:32px;width:32px;border:1px solid rgba(0, 0, 0, .2);margin:2px !important; cursor:pointer
+	}
+	
+	.overlay {
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		
+		z-index: 100;
+		
+		background-color: black;
+		opacity: 0.5;
+}
+</style>
+<script type="text/javascript">
+	$(document).ready(function(){
+		$(".product-color-box").click(function(){
+			//console.log($(this).attr('data-color-id'));
+			//$(this).css("background",convertHex($(this).attr('data-color-id'),0.9));
+		//	$(this).attr("disabled","disabled");
+		});
+	
+		function convertHex(hex,opacity){
+			hex = hex.replace('#','');
+			r = parseInt(hex.substring(0,2), 16);
+			g = parseInt(hex.substring(2,4), 16);
+			b = parseInt(hex.substring(4,6), 16);
+			result = 'rgba('+r+','+g+','+b+','+opacity/100+')';
+			return result;
+	}
+	
+	});
+</script>
 <?php 
 $this->load->view(ADMIN_PATH.'/templates/footer',$this->data); 
 ?>

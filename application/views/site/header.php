@@ -30,7 +30,7 @@
 							<a href="#" class="btn btn-xs btn-default" data-toggle="dropdown"><span class="icon icon-lg flaticon-zoom45"></span></a>
 						</div>
 						<div class="btn-outer btn-shopping-cart">
-							<a href="#drop-shopcart" class="btn btn-xs btn-default open-cart" data-toggle="dropdown"><span class="icon icon-md flaticon-shopping66"></span><span class="badge">3</span></a>
+							<a href="#drop-shopcart" class="btn btn-xs btn-default open-cart" data-toggle="dropdown"><span class="icon icon-md flaticon-shopping66"></span><span class="badge cart-count"><?php echo $cart_count; ?></span></a>
 							<div class="hidden">
 								<div id="drop-shopcart" class="shoppingcart-box">
 									<div class="title">
@@ -49,28 +49,7 @@
 										</div>
 									</div>
 									<div class="list animate-delay-outer">
-										<div class="item animate-delay fadeInRight">
-											<div class="image">
-												<a href="product.html" class="preview-image"><img src="<?=base_url()?>images/products/product-03.jpg" alt=""></a>
-											</div>
-											<div class="description">
-												<a href="#">Mauris et ligula quis</a><strong class="price">1 x $44.95</strong>
-											</div>
-											<div class="buttons">
-												<a href="#" class="icon icon-sm flaticon-write13"></a><a href="#" class="icon icon-sm flaticon-recycle59 remove-from-cart"></a>
-											</div>
-										</div>
-										<div class="item animate-delay fadeInRight">
-											<div class="image">
-												<a href="product.html" class="preview-image"><img src="<?=base_url()?>images/products/product-05.jpg" alt=""></a>
-											</div>
-											<div class="description">
-												<a href="#">Mauris et ligula quis</a><strong class="price">1 x $44.95</strong>
-											</div>
-											<div class="buttons">
-												<a href="#" class="icon icon-sm flaticon-write13"></a><a href="#" class="icon icon-sm flaticon-recycle59 remove-from-cart"></a>
-											</div>
-										</div>
+										
 									</div>
 									<div class="total">
 										Total: <strong>$44.95</strong>
@@ -120,7 +99,7 @@
 							<!-- Secondary menu -->
 							<div class="top-link pull-right compact-visible">
 								<div class="btn-outer btn-shopping-cart">
-									<a href="#drop-shopcart" class="btn btn-xs btn-default open-cart" data-toggle="dropdown"><span class="icon icon-md flaticon-shopping66"></span><span class="badge">3</span></a>
+									<a href="#product-cart-count" class="btn btn-xs btn-default open-cart" data-toggle="dropdown"><span class="icon icon-md flaticon-shopping66"></span><span class="badge cart-count"><?php echo $cart_count; ?></span></a>
 								</div>
 							</div>
 						</div>

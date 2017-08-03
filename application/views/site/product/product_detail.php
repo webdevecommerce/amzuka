@@ -26,7 +26,7 @@
 <link href="<?=base_url()?>css/site/coolbaby.css" rel="stylesheet">
 </head>
 <body class="responsive">
-<?php $product = $productArr->result(); ?>
+<?php #$product = $productArr->result(); ?>
 <div class="loader">
 	<div class="fond">
 		<div class="contener_general">
@@ -117,22 +117,22 @@
 				</div>
 				<div class="single-product-carousel slick-style4">
 					<div class="carousel-item">
-						<img class="cloudzoom" src="<?php echo base_url().'images/products/390x525/'.$product[0]->image.'.jpg'; ?>" data-cloudzoom="zoomImage: '<?php echo base_url().'images/products/800x1077/'.$product[0]->image.'.jpg'; ?>', autoInside : 991, zoomSizeMode: 'image'" alt=""/>
+						<img class="cloudzoom" src="<?php echo base_url().'images/products/390x525/'.$product->row()->image; ?>" data-cloudzoom="zoomImage: '<?php echo base_url().'images/products/800x1077/'.$product->row()->image; ?>', autoInside : 991, zoomSizeMode: 'image'" alt=""/>
 					</div>
 					<div class="carousel-item">
-						<img class="cloudzoom" src="<?php echo base_url().'images/products/390x525/'.$product[0]->image.'.jpg'; ?>" data-cloudzoom="zoomImage: '<?php echo base_url().'images/products/800x1077/'.$product[0]->image.'.jpg'; ?>', autoInside : 991, zoomSizeMode: 'image'" alt=""/>
+						<img class="cloudzoom" src="<?php echo base_url().'images/products/390x525/'.$product->row()->image; ?>" data-cloudzoom="zoomImage: '<?php echo base_url().'images/products/800x1077/'.$product->row()->image; ?>', autoInside : 991, zoomSizeMode: 'image'" alt=""/>
 					</div>
 					<div class="carousel-item">
-						<img class="cloudzoom" src="<?php echo base_url().'images/products/390x525/'.$product[0]->image.'.jpg'; ?>" data-cloudzoom="zoomImage: '<?php echo base_url().'images/products/800x1077/'.$product[0]->image.'.jpg'; ?>', autoInside : 991, zoomSizeMode: 'image'" alt=""/>
+						<img class="cloudzoom" src="<?php echo base_url().'images/products/390x525/'.$product->row()->image; ?>" data-cloudzoom="zoomImage: '<?php echo base_url().'images/products/800x1077/'.$product->row()->image; ?>', autoInside : 991, zoomSizeMode: 'image'" alt=""/>
 					</div>
 					<div class="carousel-item">
-						<img class="cloudzoom" src="<?php echo base_url().'images/products/390x525/'.$product[0]->image.'.jpg'; ?>" data-cloudzoom="zoomImage: '<?php echo base_url().'images/products/800x1077/'.$product[0]->image.'.jpg'; ?>', autoInside : 991, zoomSizeMode: 'image'" alt=""/>
+						<img class="cloudzoom" src="<?php echo base_url().'images/products/390x525/'.$product->row()->image; ?>" data-cloudzoom="zoomImage: '<?php echo base_url().'images/products/800x1077/'.$product->row()->image; ?>', autoInside : 991, zoomSizeMode: 'image'" alt=""/>
 					</div>
 					<div class="carousel-item">
-						<img class="cloudzoom" src="<?php echo base_url().'images/products/390x525/'.$product[0]->image.'.jpg'; ?>" data-cloudzoom="zoomImage: '<?php echo base_url().'images/products/800x1077/'.$product[0]->image.'.jpg'; ?>', autoInside : 991, zoomSizeMode: 'image'" alt=""/>
+						<img class="cloudzoom" src="<?php echo base_url().'images/products/390x525/'.$product->row()->image; ?>" data-cloudzoom="zoomImage: '<?php echo base_url().'images/products/800x1077/'.$product->row()->image; ?>', autoInside : 991, zoomSizeMode: 'image'" alt=""/>
 					</div>
 					<div class="carousel-item">
-						<img class="cloudzoom" src="<?php echo base_url().'images/products/390x525/'.$product[0]->image.'.jpg'; ?>" data-cloudzoom="zoomImage: '<?php echo base_url().'images/products/800x1077/'.$product[0]->image.'.jpg'; ?>', autoInside : 991, zoomSizeMode: 'image'" alt=""/>
+						<img class="cloudzoom" src="<?php echo base_url().'images/products/390x525/'.$product->row()->image; ?>" data-cloudzoom="zoomImage: '<?php echo base_url().'images/products/800x1077/'.$product->row()->image; ?>', autoInside : 991, zoomSizeMode: 'image'" alt=""/>
 					</div>
 				</div>
 			</div>
@@ -140,7 +140,7 @@
 				<div class="wrapper">
 					<div class="slider-nav">
 						<div class="carousel-item">
-							<img src="<?php echo base_url().'images/products/390x525/'.$product[0]->image.'.jpg'; ?>" alt="">
+							<img src="<?php echo base_url().'images/products/390x525/'.$product->row()->image; ?>" alt="">
 						</div>
 						<div class="carousel-item">
 							<img src="<?=base_url()?>images/products/productpage-img2.jpg" alt="">
@@ -166,13 +166,13 @@
 		</div>
 		
 		<div class="product-info-cell">
-			<h2><?php echo $product[0]->product_name; ?></h2>
-			<span class="price old">$<?php echo $product[0]->sale_price; ?></span><span class="price new">$<?php echo $product[0]->price; ?></span>
+			<h2><?php echo $product->row()->product_name; ?></h2>
+			<span class="price old">$<?php echo $product->row()->sale_price; ?></span><span class="price new">$<?php echo $product->row()->price; ?></span>
 			<div class="rating">
 				<i class="icon flaticon-star129 icon-xs"></i><i class="icon flaticon-star129 icon-xs"></i><i class="icon flaticon-star129 icon-xs"></i><i class="icon flaticon-star129 icon-xs"></i><i class="icon flaticon-star129 icon-xs"></i>
 			</div>
 			<p>
-				<span><strong>In Stock</strong></span><span>SKU: 00065</span>
+				<span><strong>In Stock</strong></span><span style="color:<?php if($product->row()->quantity >0){ echo "green"; }else{ echo "red"; } ?>"> <?php echo $product->row()->quantity; ?></span>
 			</p>
 			<div class="line-divider">
 			</div>
@@ -180,10 +180,18 @@
 			</div>
 			<form action="#">
 				<div class="product-options">
-					<i class="disable icon icon-size">S</i><i class="icon icon-size">M</i><i class="disable icon icon-size">L</i><i class="disable icon icon-size">XL</i><i class="disable icon icon-size">XXL</i>
+					<?php foreach($sizeArr->result() as $size){ if($size->size_stock > 0) {  ?>
+						<i class="icon icon-size"><?php echo $size->value; ?></i>
+					<?php }else{ ?>
+						<i class="disable icon icon-size" style="color:#e4dddd;"><?php echo $size->value; ?></i>
+					<?php }} ?>
+					<!-- <i class="disable icon icon-size">S</i><i class="icon icon-size">M</i><i class="disable icon icon-size">L</i><i class="disable icon icon-size">XL</i><i class="disable icon icon-size">XXL</i> -->
 				</div>
 				<div class="product-options">
-					<i class="icon icon-color icon-color-pink"></i><i class="icon icon-color icon-color-white"></i><i class="icon icon-color icon-color-grey"></i><i class="icon icon-color icon-color-marine"></i>
+					<?php foreach($colorArr->result() as $color){  ?>
+						<i class="icon icon-color" style="background:<?php echo $color->value; ?>"></i>
+					<?php } ?>
+					<!-- <i class="icon icon-color icon-color-pink"></i><i class="icon icon-color icon-color-white"></i><i class="icon icon-color icon-color-grey"></i><i class="icon icon-color icon-color-marine"></i> -->
 				</div>
 				<div class="form-inputs">
 					<label>Qty:</label>
@@ -200,7 +208,7 @@
 					</div>
 					<div id="product-description" class="panel-collapse collapse">
 						<div class="panel-body">
-							 <?php echo $product[0]->description; ?>
+							 <?php echo $product->row()->description; ?>
 						</div>
 					</div>
 				</div>

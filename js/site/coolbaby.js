@@ -150,6 +150,7 @@ jQuery(function($) {
         var $link = button.closest('.product-preview').find('.preview-image').clone();
         var $title = button.closest('.product-preview').find('.title a').clone();
         var $price = button.closest('.product-preview').find('span.price:first').clone();
+				console.log($price);
         var $template = $j("#liTemplate > div").clone().appendTo('#drop-shopcart .list');
         $link.find("img.img-second").remove().end().appendTo('#drop-shopcart .list > div:last .image');
         $title.appendTo('#drop-shopcart .list > div:last .description .product-name');
@@ -159,7 +160,7 @@ jQuery(function($) {
             $j(this).closest('.item').fadeIn().remove();
             if ($j("#drop-shopcart .list > div").length == 0) {
                 $j("#drop-shopcart .total").hide();
-                $j("#drop-shopcart .empty").show();
+                $j("#drop-shopcart .empty").show();	
             }
         })
         var checkAnimated = function() {

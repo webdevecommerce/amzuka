@@ -1,7 +1,6 @@
 <?php 
 $this->load->view(ADMIN_PATH.'/templates/header',$this->data); 
 ?>
-
 <div class="x_panel">
 	<div class="x_title">
 		<div class="clearfix"></div>
@@ -60,7 +59,7 @@ $this->load->view(ADMIN_PATH.'/templates/header',$this->data);
 							  <td><?php echo $details->filter_name; ?></td>
 								<td><button type="button" class="btn btn-primary"><a href="<?php echo ADMIN_PATH; ?>/filters/addFilterValues/<?php echo $details->id; ?>"  style="color:white;">Add/Show values</a></button></td>
 							  <td><?php echo $details->status; ?></td>
-							  <td><a href="<?php echo ADMIN_PATH; ?>/filters/editFilter/<?php echo $details->id; ?>" class=".btn-primary" style="color:blue;">Edit</a> | <a href="<?php echo ADMIN_PATH; ?>/filters/deleteFilter/<?php echo $details->id; ?>" class=".btn-primary" style="color:blue;">Delete</a></td>
+							  <td><a href="<?php echo ADMIN_PATH; ?>/filters/editFilter/<?php echo $details->id; ?>" class=".btn-primary" style="color:blue;">Edit</a> <?php if($details->id != 11 && $details->id != 12){ ?><a href="<?php echo ADMIN_PATH; ?>/filters/deleteFilter/<?php echo $details->id; ?>" class=".btn-primary" style="color:blue;">Delete</a><?php } ?></td>
 							</tr><?php } ?>
 							</tbody>
 						</table>

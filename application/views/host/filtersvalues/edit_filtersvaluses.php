@@ -22,10 +22,10 @@ $this->load->view(ADMIN_PATH.'/templates/header',$this->data);
 					<input type="hidden" name="filter_id" value="<?php echo $filter_values[0]->filter_id; ?>"/>
 					<input type="hidden" name="id" value="<?php echo $filter_values[0]->id; ?>"/>
 						<div class="form-group">
-							<label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">Name <span class="required">*</span>
+							<label class="control-label col-md-3 col-sm-3 col-xs-12" for="name"><?php if($this->uri->segment(4) == 12){ echo "Select Color"; }else{ echo "Name"; } ?> <span class="required">*</span>
 							</label>
 							<div class="col-md-9 col-sm-9 col-xs-12">
-								<input type="text" name="value" id="value" value="<?php echo $filter_values[0]->value; ?>" required class="form-control col-md-7 col-xs-12" value="" />
+								<input type="text" name="value" id="<?php if($filter_values[0]->filter_id == 12){ echo "color-picker"; }else{ echo "value"; } ?>" value="<?php echo $filter_values[0]->value; ?>" required class="form-control col-md-7 col-xs-12" value="" />
 							</div>
 						</div>
 						<div class="ln_solid"></div>
@@ -40,8 +40,7 @@ $this->load->view(ADMIN_PATH.'/templates/header',$this->data);
 		</div>
 	</div>
 </div>
-
-
 <?php 
 $this->load->view(ADMIN_PATH.'/templates/footer',$this->data); 
 ?>
+

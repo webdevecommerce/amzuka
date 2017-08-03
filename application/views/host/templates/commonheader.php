@@ -14,7 +14,23 @@
 		<base href="<?php echo base_url(); ?>" />
 		<link rel="shortcut icon" href="<?php echo base_url().'images/logo/'.$favicon; ?>">
 
+		<!-- jQuery -->
+    <script src="vendors/jquery/dist/jquery.min.js"></script>
     <!-- Bootstrap -->
+		<script src="js/host/jquery.minicolors.min.js"></script>
+    <link href="css/host/jquery.minicolors.css" rel="stylesheet">
+		
+		<script type="text/javascript">
+			jQuery(document).ready(function($){
+				$("#color-picker").minicolors({
+          control: 'wheel',
+          theme: 'bootstrap'
+        });
+				
+			});
+		</script>
+
+
     <link href="vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Font Awesome -->
     <link href="vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">

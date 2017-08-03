@@ -117,13 +117,13 @@ $this->load->view(ADMIN_PATH.'/templates/header',$this->data);
 							<label class="control-label col-md-3 col-sm-3 col-xs-12" for="status">Filters <span class="required">*</span>
 							</label>
 							<div class="col-md-9 col-sm-9 col-xs-12 filters">
-							<?php foreach($filters_details->result() as $row){ ?>
+							<?php foreach($filters_details->result() as $row){ if($row->id != $this->config->item('filter_id_color')  && $row->id != $this->config->item('filter_id_size')){ ?>
 									<label>
 									
 										<input type= "checkbox"  name="filters[]" value="<?php echo $row->id; ?>" <?php if(in_array($row->id,$filterArray)) echo "checked"; ?>/><?php echo ucfirst($row->filter_name); ?>
 									
 									</label>
-									<?php } ?>
+							<?php }} ?>
 								
 							</div>
 						</div>

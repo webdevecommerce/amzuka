@@ -47,6 +47,8 @@ $route[ADMIN_PATH.'/dashboard'] = ADMIN_PATH."/dashboard/admin_dashboard";
 
 $route['pages/(:any)'] = "site/cms/load_pages";
 
+$route['host/(:any)'] = "host/$1";
+
 $route['signup'] = "site/users/registration_form";
 $route['dosignup'] = "site/users/do_register";
 
@@ -66,9 +68,13 @@ $route['reset-password/(:any)'] = "site/users/reset_password_form";
 $route['update-new-password'] = "site/users/update_new_password";
 
 $route['view/(:any)'] = "site/products/productDetail";
+
+$route['site/products/(:any)'] = "site/products/$1";
 /* Added by sunil */
 
-//$route['(:any)'] = "site/category/index/$1/$2";
+$route['(:any)/(:any)'] = "site/category/index/$1/$2";
+
 
 /* End of file routes.php */
 /* Location: ./application/config/routes.php */
+?>

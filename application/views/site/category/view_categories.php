@@ -1,3 +1,8 @@
+<?php 
+
+//echo $addedProducts = $_COOKIE['amzuka_carted_products']; die;
+#echo count_non_user_cart_proudcts(); die; ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -69,7 +74,7 @@
 					</form>
 				</div>
 			</div>
-		</div>
+		</div >
 		<?php 
 
 		$this->load->view('site/header.php');?>
@@ -152,13 +157,37 @@
 						<a href="_ajax_view-product.html" class="quick-view"><span>Quick View</span></a>
 					</div>
 					<h3 class="title"><a href="<?php echo base_url().'view/'.$product->product_seo; ?>"><?php echo $product->product_name; ?></a></h3>
-					<span class="price new"><?php echo $product->price; ?></span><span class="price old"><?php echo $product->price; ?></span>
+						
+					<span class="price new product_price"><?php echo $product->price; ?></span>
+					<?php if($product->price > $product->sale_price && $produc->sale_price > 0) : ?>
+					<span class="price old"><?php echo $product->price; ?></span>
+					<?php endif; ?>
+					<div class="product-controls-list">
+					<?php 
+						$k = 0;
+						$sizeStock = explode(",",$product->size_stock);
+						$sizeValue = explode(",",$product->size_value);
+						$sizeId = explode(",",$product->size_id);
+						foreach($sizeValue as $size){ 
+								if($sizeStock[$k] > 0) {  ?>
+										<i class="icon icon-size active_product_size" data-size-id = "<?php echo $sizeId[$k]; ?>"><?php echo $size; ?></i>
+								<?php }else{ ?>
+											<i class="disable icon icon-size" style="color:#e4dddd;"><?php echo $size; ?></i>
+								<?php 
+								}
+							  $k++;
+							} 
+					?>
+					<input type="hidden" name="product_selected_sizes" class="product_selected_sizes" value="">
+					<!-- <i class="disable icon icon-size">S</i><i class="icon icon-size">M</i><i class="disable icon icon-size">L</i><i class="disable icon icon-size">XL</i><i class="disable icon icon-size">XXL</i> -->
+				</div>
 					<ul class="product-controls-list">
 						<li><a href="#"><span class="icon flaticon-heart68"></span></a></li>
 						<?php if($product->quantity > 0 ) { ?>
-						<li><a href="#drop-shopcart" class='add-to-cart open-cart'><span class="icon flaticon-shopping66"></span></a></li>
+						<li><a href="#drop-shopcart" class='add-to-cart open-cart' data-product-id="<?php echo $product->id; ?>"><span class="icon flaticon-shopping66"></span></a></li>
 						<?php } ?>
 					</ul>
+					
 					<div class="rating">
 						<i class="icon flaticon-star129 icon-xs"></i><i class="icon flaticon-star129 icon-xs"></i><i class="icon flaticon-star129 icon-xs"></i><i class="icon flaticon-star129 icon-xs"></i><i class="icon flaticon-star129 icon-xs"></i>
 					</div>
@@ -222,21 +251,6 @@
 		<div class="panel-group accordion-simple">
 			<div class="panel">
 				<div class="panel-heading">
-					<a data-toggle="collapse" href="#box1"><span class="arrow-down">+</span><span class="arrow-up">-</span> CATEGORY </a>
-				</div>
-				<div id="box1" class="panel-collapse in">
-					<div class="panel-body">
-						<ul class="simple-list">
-							<li><a href="listing.html">Suits & Blazers (15)</a></li>
-							<li><a href="listing.html">T-Shirts & Vests (15)</a></li>
-							<li><a href="listing.html">Underwear & Socks (15)</a></li>
-							<li><a href="listing.html">Jackets & Coats (15)</a></li>
-						</ul>
-					</div>
-				</div>
-			</div>
-			<div class="panel">
-				<div class="panel-heading">
 					<a data-toggle="collapse" href="#box2"><span class="arrow-down">+</span><span class="arrow-up">-</span> PRICE SLIDER</a>
 				</div>
 				<div id="box2" class="panel-collapse in">
@@ -267,181 +281,31 @@
 					</div>
 				</div>
 			</div>
-			<div class="panel">
-				<div class="panel-heading">
-					<a data-toggle="collapse" class="collapsed" href="#box3"><span class="arrow-down">+</span><span class="arrow-up">-</span> POPULAR TAGS</a>
-				</div>
-				<div id="box3" class="panel-collapse collapse">
-					<div class="panel-body">
-						<!-- Popular tags -->
-						<div class="cloud-tags">
-							<a href="listing.html" style="font-size: 0.92em">Camera</a><a href="listing.html" style="font-size: 1.31em">Coats</a><a href="listing.html" style="font-size: 1.15em">Jackets</a><a href="listing.html" style="font-size: 1.15em">Jeans</a><a href="listing.html" style="font-size: 1.15em">Lingerie</a><a href="listing.html" style="font-size: 1.15em">Shirts</a><a href="listing.html" style="font-size: 1.15em">Shorts</a><a href="listing.html" style="font-size: 1.15em">Skirts</a><a href="listing.html" style="font-size: 1.23em">Tops</a><a href="listing.html" style="font-size: 0.77em">Apple</a><a href="listing.html" style="font-size: 1.08em">Awesome</a><a href="listing.html" style="font-size: 0.92em">Cool t-shirt</a><a href="listing.html" style="font-size: 0.92em">Dresses</a><a href="listing.html" style="font-size: 0.92em">Good laptop</a><a href="listing.html" style="font-size: 0.92em">Mobile</a><a href="listing.html" style="font-size: 0.92em">Nice notebook</a><a href="listing.html" style="font-size: 1.12em">Phone</a>
-						</div>
-						<!-- //end Popular tags -->
+			<?php $i = 0; foreach($filters->result_array() as $filter){?>
+				<div class="panel">
+					<div class="panel-heading">
+						<a data-toggle="collapse" class="collapsed" href="#filter<?php echo $i; ?>"><span class="arrow-down">+</span><span class="arrow-up">-</span><?php echo $filter['filter_name']; ?></a>
 					</div>
-				</div>
-			</div>
-			<div class="panel">
-				<div class="panel-heading">
-					<a data-toggle="collapse" class="collapsed" href="#box22"><span class="arrow-down">+</span><span class="arrow-up">-</span> PRICE SELECT</a>
-				</div>
-				<div id="box22" class="panel-collapse collapse">
-					<div class="panel-body">
-						<ul class="simple-list">
-							<li>
-							<input name="checkbox-price-1" type="checkbox" value="">
-							<span class="label">$0.00 - $10,000.00 (13)</span></li>
-							<li>
-							<input name="checkbox-price-2" type="checkbox" value="">
-							<span class="label">$10,000.00 - $20,000.00 (2)</span></li>
-						</ul>
-					</div>
-				</div>
-			</div>
-			<div class="panel">
-				<div class="panel-heading">
-					<a data-toggle="collapse" class="collapsed" href="#box4"><span class="arrow-down">+</span><span class="arrow-up">-</span> COMPARE PRODUCTS </a>
-				</div>
-				<div id="box4" class="panel-collapse collapse">
-					<div class="panel-body">
-						<p>
-							You have no items to compare.
-						</p>
-					</div>
-				</div>
-			</div>
-			<div class="panel">
-				<div class="panel-heading">
-					<a data-toggle="collapse" class="collapsed" href="#box5"><span class="arrow-down">+</span><span class="arrow-up">-</span> COMMUNITY POLL</a>
-				</div>
-				<div id="box5" class="panel-collapse collapse">
-					<div class="panel-body">
-						<form >
-							<p>
-								<strong>WHAT IS YOUR FAVORITE MAGENTO FEATURE?</strong>
-							</p>
-							<div class="radio">
-								<label>
-								<input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
-								Layered Navigation </label>
-							</div>
-							<div class="radio">
-								<label>
-								<input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">
-								Price Rules </label>
-							</div>
-							<div class="radio">
-								<label>
-								<input type="radio" name="optionsRadios" id="optionsRadios3" value="option3">
-								Category Management </label>
-							</div>
-							<div class="radio">
-								<label>
-								<input type="radio" name="optionsRadios" id="optionsRadios4" value="option4">
-								Compare Products </label>
-							</div>
-							<button class="btn btn-cool">Vote</button>
-						</form>
-					</div>
-				</div>
-			</div>
-			<div class="panel">
-				<div class="panel-heading">
-					<a data-toggle="collapse" class="collapsed" href="#box23"><span class="arrow-down">+</span><span class="arrow-up">-</span> BESTSELLERS </a>
-				</div>
-				<div id="box23" class="panel-collapse collapse">
-					<div class="panel-body">
-						<div class="products-widget vertical">
-							<div class="slides slick-style2">
-								<div class="carousel-item">
-									<div class="product">
-										<div class="preview-image-outer">
-											<a href="product.html" class="preview-image"><img class="img-responsive" src="<?php echo base_url(); ?>images/products/product-02.jpg" alt=""></a>
-										</div>
-										<p class="name">
-											<a href="product.html">Product Example</a>
-										</p>
-										<span class="price new">$214.99</span><span class="price old">$214.99</span>
-										<div class="rating">
-											<i class="icon flaticon-star129 icon-xs"></i><i class="icon flaticon-star129 icon-xs"></i><i class="icon flaticon-star129 icon-xs"></i><i class="icon flaticon-star129 icon-xs"></i><i class="icon flaticon-star129 icon-xs"></i>
-										</div>
-									</div>
-								</div>
-								<div class="carousel-item">
-									<div class="product">
-										<div class="preview-image-outer">
-											<a href="product.html" class="preview-image"><img class="img-responsive" src="<?php echo base_url(); ?>images/products/product-01.jpg" alt=""></a>
-										</div>
-										<p class="name">
-											<a href="product.html">Product Example</a>
-										</p>
-										<span class="price new">$214.99</span><span class="price old">$214.99</span>
-										<div class="rating">
-											<i class="icon flaticon-star129 icon-xs"></i><i class="icon flaticon-star129 icon-xs"></i><i class="icon flaticon-star129 icon-xs"></i><i class="icon flaticon-star129 icon-xs"></i><i class="icon flaticon-star129 icon-xs"></i>
-										</div>
-									</div>
-								</div>
-								<div class="carousel-item">
-									<div class="product">
-										<div class="preview-image-outer">
-											<a href="product.html" class="preview-image"><img class="img-responsive" src="<?php echo base_url(); ?>images/products/product-03.jpg" alt=""></a>
-										</div>
-										<p class="name">
-											<a href="product.html">Product Example</a>
-										</p>
-										<span class="price new">$214.99</span><span class="price old">$214.99</span>
-										<div class="rating">
-											<i class="icon flaticon-star129 icon-xs"></i><i class="icon flaticon-star129 icon-xs"></i><i class="icon flaticon-star129 icon-xs"></i><i class="icon flaticon-star129 icon-xs"></i><i class="icon flaticon-star129 icon-xs"></i>
-										</div>
-									</div>
-								</div>
-								<div class="carousel-item">
-									<div class="product">
-										<div class="preview-image-outer">
-											<a href="product.html" class="preview-image"><img class="img-responsive" src="<?php echo base_url(); ?>images/products/product-04.jpg" alt=""></a>
-										</div>
-										<p class="name">
-											<a href="product.html">Product Example</a>
-										</p>
-										<span class="price new">$214.99</span><span class="price old">$214.99</span>
-										<div class="rating">
-											<i class="icon flaticon-star129 icon-xs"></i><i class="icon flaticon-star129 icon-xs"></i><i class="icon flaticon-star129 icon-xs"></i><i class="icon flaticon-star129 icon-xs"></i><i class="icon flaticon-star129 icon-xs"></i>
-										</div>
-									</div>
-								</div>
-								<div class="carousel-item">
-									<div class="product">
-										<div class="preview-image-outer">
-											<a href="product.html" class="preview-image"><img class="img-responsive" src="<?php echo base_url(); ?>images/products/product-05.jpg" alt=""></a>
-										</div>
-										<p class="name">
-											<a href="product.html">Product Example</a>
-										</p>
-										<span class="price new">$214.99</span><span class="price old">$214.99</span>
-										<div class="rating">
-											<i class="icon flaticon-star129 icon-xs"></i><i class="icon flaticon-star129 icon-xs"></i><i class="icon flaticon-star129 icon-xs"></i><i class="icon flaticon-star129 icon-xs"></i><i class="icon flaticon-star129 icon-xs"></i>
-										</div>
-									</div>
-								</div>
-								<div class="carousel-item">
-									<div class="product">
-										<div class="preview-image-outer">
-											<a href="product.html" class="preview-image"><img class="img-responsive" src="<?php echo base_url(); ?>images/products/product-06.jpg" alt=""></a>
-										</div>
-										<p class="name">
-											<a href="product.html">Product Example</a>
-										</p>
-										<span class="price new">$214.99</span><span class="price old">$214.99</span>
-										<div class="rating">
-											<i class="icon flaticon-star129 icon-xs"></i><i class="icon flaticon-star129 icon-xs"></i><i class="icon flaticon-star129 icon-xs"></i><i class="icon flaticon-star129 icon-xs"></i><i class="icon flaticon-star129 icon-xs"></i>
-										</div>
-									</div>
-								</div>
-							</div>
+					<div id="filter<?=$i;?>" class="panel-collapse collapse">
+						<div class="panel-body">
+							<ul class="simple-list">
+								<?php foreach(explode(",",$filter['filter_values']) as $filter_value){ ?>
+										<?php if($filter['filter_id'] == 12){ ?>
+													<li style="padding:0px !important">
+													<span class="product-color-box" style="background:<?php echo $filter_value; ?>" data-color-id="<?php echo $filter_value; ?>"></span>
+											<?php }else{ ?>
+														<li>
+														<input name="checkbox-price-1" type="checkbox" value="">
+														<span class="label"><?php echo $filter_value; ?></span>
+											<?php } ?>
+										</li>
+								<?php } ?>
+								
+							</ul>
 						</div>
 					</div>
 				</div>
-			</div>
+			<?php $i++; } ?>
 		</div>
 		</aside>
 		<!-- //end Left column -->
@@ -506,5 +370,43 @@
 <script src="<?=base_url()?>js/site/jquery.plugin.min.js"></script>
 <script src="<?=base_url()?>js/site/jquery.countdown.min.js"></script>
 <script src="<?=base_url()?>js/site/coolbaby.js"></script>
+
+<script type="text/javascript">
+	jQuery(document).ready(function($){
+		
+			var sizeArr = '';
+				  
+			$(".add-to-cart").on("click",function(){
+					var product_id = $(this).attr('data-product-id');
+					$.ajax({
+						url: "<?php echo base_url(); ?>site/products/addProductsToCart",
+						method: "POST",
+						data: {"product_id": product_id},
+						success:function(data){
+							$(".cart-count").text(data);
+							//count = "<?php echo count_non_user_cart_proudcts(); ?>";
+							//alert(count);
+						}
+					});
+			});
+			 
+			/* When selecting product size*/
+				$(".active_product_size").click(function(){
+					$(this).css("background","goldenrod");
+					var productSelectedSize = $(this).closest("div.product-controls-list").find(".product_selected_sizes");
+					sizeArr = productSelectedSize.val() +","+$(this).attr('data-size-id');
+					productSelectedSize.val(sizeArr);
+					console.dir(sizeArr);
+				});
+			
+			/* When selecting product size --- Ends here*/
+	});
+</script>
+
+<style>
+.product-color-box{float:left;height:32px;width:32px;border:1px solid rgba(0, 0, 0, .2);margin:2px !important; cursor:pointer}
+.icon.icon-size{line-height: 16px;width: auto;padding: 3px;}
+</style>
+
 </body>
 </html>

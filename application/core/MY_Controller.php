@@ -20,8 +20,9 @@ class MY_Controller extends CI_Controller {
 	function __construct(){ 
     parent::__construct(); 
 		ob_start();
+		
 		error_reporting(E_ALL ^ (E_NOTICE | E_WARNING));
-		$this->load->helper( array('url', 'text', 'cookie'));
+		$this->load->helper( array('url', 'text', 'cookie','product_helper'));
 		$this->load->library(array('pagination', 'session','curl'));
 		
 		$this->output->set_header('Cache-Control: no-store, no-cache, must-revalidate, post-check=0, pre-check=0');
@@ -30,7 +31,6 @@ class MY_Controller extends CI_Controller {
 		| Connecting Model
 		**/
 		$this->load->model(array('landing_model'));
-		
 		/**
 		| 	Connecting Database|
 		**/
@@ -138,3 +138,6 @@ class MY_Controller extends CI_Controller {
 	}
    	
 }
+
+
+?>

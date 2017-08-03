@@ -57,10 +57,15 @@ class Products extends MY_Controller {
 		if ($this->checkLogin('A') == ''){
 			redirect(ADMIN_PATH);
 		}else {
+			
 			$condition = array();
 			$edit_mode=FALSE;
 			$condition = array('rootID' => '0');
 			$this->data['root_categories'] = $this->categories_model->get_all_details(CATEGORIES,$condition);
+			$this->data['sizeFilters'] = $this->categories_model->get_all_details(FILTERVALUES,array('filter_id' => $this->config->item('filter_id_size')));
+			
+			$this->data['colorFilters'] = $this->categories_model->get_all_details(FILTERVALUES,array('filter_id' => $this->config->item('filter_id_color')));
+			//print_r($this->data['colorFilters']->result());die;
 			$product_id = $this->uri->segment(4,0);
 			if($product_id!=''){
 				$condition = array('id' => $categories_id);
@@ -97,13 +102,25 @@ class Products extends MY_Controller {
 			$shipping_cost = $this->input->post('shipping_cost');
 			$price = $this->input->post('price');
 			$filters = $this->input->post('filters');
-			
+			$size = $this->input->post('size');
+			$color = $this->input->post('color');
+	
+			//print_r($filters);di;
+
 			$product_seo = url_title($product_name, '-', TRUE);
 			$product_name_check = $this->product_model->get_all_details(PRODUCT,array('product_seo'=>$product_seo,'category_id'=>$category_id));
 			if($product_name_check->num_rows > 0){
 				$this->setErrorMessage('error','Product name already exists in this category' );
 				redirect(ADMIN_PATH.'/products/add_edit_product_form');
 			}
+			
+			$sizeStock = array_values($size);
+			$availSize = array_keys($size);
+			$availColors = array_keys($color);
+			//$availSizeArr = array_fill_keys($availSize,$this->config->item(''));
+
+			//print_r($availSize);die;
+			
 			
 			
 			if(isset($tax) && $tax <= 0){
@@ -124,7 +141,7 @@ class Products extends MY_Controller {
 			}else{
 				$featuredstatus='no';
 			}
-			$excludeArr = array('product_id','filters','sub_category_id','stock_count','tax');
+			$excludeArr = array('product_id','filters','sub_category_id','stock_count','tax','size','color');
 			$dataArr = array(
 					'product_name' => $product_name,
 					'product_seo' => url_title($product_name, '-', TRUE),
@@ -186,6 +203,8 @@ class Products extends MY_Controller {
 			}
 			
 			$this->product_model->insert_product_filters($filters,$produc_id);
+			$this->product_model->insert_product_filters($availSize,$produc_id,'size',$sizeStock);
+			$this->product_model->insert_product_filters($availColors,$produc_id,'color');
 			
 			redirect(ADMIN_PATH.'/products/display_products');
 		}
@@ -362,6 +381,12 @@ $configSize2['source_image'] = './images/products/800x1077/'.$image_name;
 		$sub_categories = $this->product_model->get_selected_fields(CATEGORIES,array('filters'),array('id'=>$sub_cat_id));
 		if($sub_categories->row_array()['filters'] != ''){
 			$filtersId = explode(",",$sub_categories->row_array()['filters']);
+			
+			/* Mandatory filters for all product, So manuaaly pushed it */
+			//array_push($filtersId,$this->config->item('filter_id_size'));
+			//array_push($filtersId,$this->config->item('filter_id_color'));
+			/* Mandatory filters for all product, So manuaaly pushed it */
+			
 			if(!empty(array_filter($filtersId))){
 				foreach($filtersId as $key => $filter_value){
 					$filter_array = $this->get_filters_with_value($filter_value);
@@ -438,6 +463,8 @@ $configSize2['source_image'] = './images/products/800x1077/'.$image_name;
 	}, []); */
 	
 	}
+	
+	
 	
 	
 	

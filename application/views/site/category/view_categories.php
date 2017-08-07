@@ -378,23 +378,31 @@
 				  
 			$(".add-to-cart").on("click",function(){
 					var product_id = $(this).attr('data-product-id');
-					$.ajax({
-						url: "<?php echo base_url(); ?>site/products/addProductsToCart",
-						method: "POST",
-						data: {"product_id": product_id},
-						success:function(data){
-							$(".cart-count").text(data);
-							//count = "<?php echo count_non_user_cart_proudcts(); ?>";
-							//alert(count);
-						}
-					});
+					var productSelectedSize = $(this).closest("div.product-controls-list").find(".product_selected_sizes");
+					productSize = $(this).attr('data-size-id');
+					alert(productSize);
+					if( productSize != '' ){
+							$.ajax({
+								url: "<?php echo base_url(); ?>site/products/addProductsToCart",
+								method: "POST",
+								data: {"product_id": product_id,"product_size":productSize},
+								success:function(data){
+									$(".cart-count").text(data);
+									//count = "<?php echo count_non_user_cart_proudcts(); ?>";
+									//alert(count);
+								}
+							});
+					}else{
+						alert("Choose size of a product");
+					}
 			});
 			 
 			/* When selecting product size*/
 				$(".active_product_size").click(function(){
+					$(".active_product_size").css("background","none");
 					$(this).css("background","goldenrod");
 					var productSelectedSize = $(this).closest("div.product-controls-list").find(".product_selected_sizes");
-					sizeArr = productSelectedSize.val() +","+$(this).attr('data-size-id');
+					sizeArr = $(this).attr('data-size-id');
 					productSelectedSize.val(sizeArr);
 					console.dir(sizeArr);
 				});

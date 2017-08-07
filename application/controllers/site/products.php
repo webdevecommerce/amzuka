@@ -65,6 +65,12 @@ class Products extends MY_Controller {
 					$product_count = 1;
 					setcookie("amzuka_carted_product",$product_id,time()+31556926,'/amzuka');
 			}
+			
+			// Set selected size for particular product
+			$product_size = $this->input->post('product_size');
+			if( $product_size  != '')
+				setcookie("product_size_".$product_id,$product_size,time()+31556926,'/amzuka');
+			
 			echo $product_count;
 	}
 	
